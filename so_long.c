@@ -40,7 +40,7 @@ void clearscreen(t_all *data)
 
 
 
-int    render (t_all *data, void *position)
+int render (t_all *data, void *position)
 {
 	printf("working!!\n");
     usleep(100000);
