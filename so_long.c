@@ -45,18 +45,8 @@ void clearscreen(t_all *data)
 int init_sprites(t_all *all, int a, int b)
 {
 
-
-
-    // all->sprites[0].sprite = mlx_xpm_file_to_image(all->engine.mlx, "sprites/block.xpm", &x, &y);
-    // if (!all->sprites[0].sprite)
-    // {
-    //     printf("error init sprite \n");
-    //     return (0);
-    // }
-
     mlx_put_image_to_window(all->engine.mlx, all->engine.mlx_win, all->sprites[0].sprite, a, b);
     
-
     return (1);
 }
 
@@ -122,7 +112,7 @@ int main(void)
 
     mlx_start(&data);
 
-	mlx_loop_hook(data.engine.mlx, (int (*)(void *))render, &data);
+	mlx_loop_hook(data.engine.mlx, &render, &data);
 
 	//draw_rect(&data, (t_v2i){50, 50}, (t_v2i){100, 100}, WHITE);
     //init_sprites(&data);
