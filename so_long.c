@@ -14,6 +14,8 @@ void    my_mlx_pixel_put(t_all *data, t_v2i pos, int color)
     *(unsigned int*)dst = color;
 }
 
+
+
 void    draw_rect(t_all *data, t_v2i start, t_v2i dim, int color)
 {
     t_v2i   pos;
@@ -48,19 +50,27 @@ int render (t_all *data, void *position)
 }
 
 
+void    mlx_start(t_all *data)
+{
+    printf("LOOP START!\n");
+
+    data->engine.mlx = mlx_init();
+    data->engine.mlx_win = mlx_new_window(data->engine.mlx, SCREEN_HEIGHT, SCREEN_WIDTH, "so long!");
+    data->engine.img = mlx_new_image(data->engine.mlx, SCREEN_HEIGHT, SCREEN_WIDTH);
+    data->engine.addr = mlx_get_data_addr(data->engine.img, &data->engine.bits_per_pixel, &data->engine.line_length,
+                                         &data->engine.endian);
+    mlx_put_image_to_window(data->engine.mlx, data->engine.mlx_win, data->engine.img, 0, 0);
+    
+}
+
+
 
 int main(void)
 {
     t_all data;
 
-    printf("LOOP START!\n");
 
-    data.engine.mlx = mlx_init();
-    data.engine.mlx_win = mlx_new_window(data.engine.mlx, SCREEN_HEIGHT, SCREEN_WIDTH, "so long!");
-    data.engine.img = mlx_new_image(data.engine.mlx, SCREEN_HEIGHT, SCREEN_WIDTH);
-    data.engine.addr = mlx_get_data_addr(data.engine.img, &data.engine.bits_per_pixel, &data.engine.line_length,
-                                         &data.engine.endian);
-    mlx_put_image_to_window(data.engine.mlx, data.engine.mlx_win, data.engine.img, 0, 0);
+    mlx_start(&data);
 
 	mlx_loop_hook(data.engine.mlx, (int (*)(void *))render, &data);
 
