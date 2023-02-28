@@ -42,12 +42,62 @@ void clearscreen(t_all *data)
 
 
 
+int init_sprites(t_all *all, int a, int b)
+{
+
+
+
+    // all->sprites[0].sprite = mlx_xpm_file_to_image(all->engine.mlx, "sprites/block.xpm", &x, &y);
+    // if (!all->sprites[0].sprite)
+    // {
+    //     printf("error init sprite \n");
+    //     return (0);
+    // }
+
+    mlx_put_image_to_window(all->engine.mlx, all->engine.mlx_win, all->sprites[0].sprite, a, b);
+    
+
+    return (1);
+}
+
+
+int fill_wall(t_all *all)
+{
+    int x = 0;
+    int y = 0;
+    
+    all->sprites[0].sprite = mlx_xpm_file_to_image(all->engine.mlx, "sprites/block.xpm", &x, &y);
+    if (!all->sprites[0].sprite)
+    {
+        printf("error init sprite \n");
+        return (0);
+    }
+    int i = 0;
+    int j = 0;
+    while(i <= SCREEN_HEIGHT)
+    {
+        j = 0;
+        while(j < SCREEN_WIDTH)
+        {
+            init_sprites(all, i, j);
+            j += 32;
+        }
+        i += 32;
+    }
+}
+
+
+
+
+
 int render (t_all *data, void *position)
 {
-	printf("working!!\n");
-    usleep(100000);
+	//printf("working!!\n");
+    fill_wall(data);
+    //usleep(100000);
     return (0);
 }
+
 
 
 void    mlx_start(t_all *data)
@@ -74,7 +124,8 @@ int main(void)
 
 	mlx_loop_hook(data.engine.mlx, (int (*)(void *))render, &data);
 
-	draw_rect(&data, (t_v2i){50, 50}, (t_v2i){100, 100}, WHITE);
+	//draw_rect(&data, (t_v2i){50, 50}, (t_v2i){100, 100}, WHITE);
+    //init_sprites(&data);
 
     mlx_loop(data.engine.mlx);
 }

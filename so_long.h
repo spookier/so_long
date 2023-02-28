@@ -39,10 +39,20 @@ typedef struct s_pos2i {
 }		t_pos2i;
 
 
+typedef struct s_sprite {
+
+	void	*sprite;
+	char	*relative_path;
+	int		width;
+	int		height;
+
+}	t_sprite;
+
 
 typedef struct	s_all {
 
 	t_engine	engine;
+	t_sprite	sprites[8];
 	t_pos2i		pos;
 
 }				t_all;
