@@ -5,6 +5,7 @@
 #define SCREEN_WIDTH 600
 
 
+
 void    my_mlx_pixel_put(t_all *data, t_v2i pos, int color)
 {
     char    *dst;
@@ -35,20 +36,15 @@ void    draw_rect(t_all *data, t_v2i start, t_v2i dim, int color)
 
 
 
-void clearscreen(t_all *data)
-{
-	mlx_put_image_to_window(data->engine.mlx, data->engine.mlx_win, data->engine.img, SCREEN_WIDTH, SCREEN_HEIGHT);
-}
-
-
-
 int init_sprites(t_all *all, int a, int b)
 {
 
-    mlx_put_image_to_window(all->engine.mlx, all->engine.mlx_win, all->sprites[0].sprite, a, b);
+    mlx_put_image_to_window(all->engine.mlx, all->engine.mlx_win, all->sprites_wall.texture_addr, a, b);
     
     return (1);
 }
+
+
 
 
 int fill_wall(t_all *all)
@@ -56,8 +52,8 @@ int fill_wall(t_all *all)
     int x = 0;
     int y = 0;
     
-    all->sprites[0].sprite = mlx_xpm_file_to_image(all->engine.mlx, "sprites/block.xpm", &x, &y);
-    if (!all->sprites[0].sprite)
+    all->sprites_wall.texture_addr = mlx_xpm_file_to_image(all->engine.mlx, "sprites/block.xpm", &x, &y);
+    if (!all->sprites_wall.texture_addr)
     {
         printf("error init sprite \n");
         return (0);
@@ -77,14 +73,29 @@ int fill_wall(t_all *all)
 }
 
 
-
-
-
-int render (t_all *data, void *position)
+int check_map(t_all *all)
 {
-	//printf("working!!\n");
-    fill_wall(data);
-    //usleep(100000);
+    int x = 0;
+    int y = 0;
+    int i = 0;
+    int j = 0;
+    while (i <= SCREEN_HEIGHT)
+    {
+        j = 0;
+        x = 0;
+        while (j <= SCREEN_WIDTH)
+        {
+            if (y <= 25 && x <= 18 && all->map[y][x] == 0)
+            {
+                //printf("j = %d | i = %d | map[%d][%d] = %d\n", j, i, y, x, all->map[y][x]);
+                mlx_put_image_to_window(all->engine.mlx, all->engine.mlx_win, all->engine.img_addr, j, i);
+            }
+            x++;
+            j += 32;
+        }
+        y++;
+        i += 32;
+    }
     return (0);
 }
 
@@ -104,18 +115,61 @@ void    mlx_start(t_all *data)
 }
 
 
+void  init_map(t_all *data)
+{
+    int rows = 25; 
+    int cols = 18;
+    
+
+    data->map = (int **)malloc(rows * sizeof(int *));
+    for (int i = 0; i < rows; i++) {
+        data->map[i] = (int *)malloc(cols * sizeof(int));
+    }
+    
+    // initialize all elements to 0
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+           data->map[i][j] = 0;
+        }
+    }
+    
+    // print the 2D array
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            printf("%d ", data->map[i][j]);
+        }
+        printf("\n");
+    }
+    printf("MAP INITIALIZED!\n\n\n");
+}
+
+
+int render (t_all *data)
+{
+	printf("working!!\n");
+    
+    check_map(data);
+    usleep(1000000);
+    return (0);
+}
+
+
 
 int main(void)
 {
     t_all data;
 
+    //data.sprites_wall = (t_sprite *)malloc(sizeof(t_sprite));
+
+    t_engine mlx;
+    data.sprites_wall.texture_path = "sprites/block.xpm"; 
+    data.sprites_wall.texture_addr = load_texture(&data, &mlx);
+    
+    init_map(&data);
 
     mlx_start(&data);
 
+
 	mlx_loop_hook(data.engine.mlx, &render, &data);
-
-	//draw_rect(&data, (t_v2i){50, 50}, (t_v2i){100, 100}, WHITE);
-    //init_sprites(&data);
-
     mlx_loop(data.engine.mlx);
 }
