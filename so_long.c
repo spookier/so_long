@@ -4,15 +4,23 @@
 #define SCREEN_HEIGHT 800
 #define SCREEN_WIDTH 600
 
-#define MAP_HEIGHT 3
-#define MAP_WIDTH 4
+#define MAP_HEIGHT 10
+#define MAP_WIDTH 10
 
 
 
-    int map[MAP_HEIGHT][MAP_WIDTH] = {
-        {1, 1, 1, 1},
-        {1, 1, 1, 1},
-        {1, 1, 1, 1}
+    int map[MAP_HEIGHT][MAP_WIDTH] = 
+    {
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 0, 0, 1, 1, 1, 1},
+        {1, 1, 1, 1, 0, 0, 1, 1, 1, 1},
+        {1, 1, 1, 1, 0, 0, 1, 1, 1, 1},
+        {1, 1, 1, 1, 0, 0, 1, 1, 1, 1},
+        {1, 1, 1, 1, 0, 0, 1, 1, 1, 1},
+        {1, 1, 1, 1, 0, 0, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     };
 
 
@@ -47,10 +55,44 @@ void    draw_rect(t_all *data, t_v2i start, t_v2i dim, int color)
 
 
 
+// int fill_wall(t_all *all)
+// {
+//     int x = 0;
+//     int y = 0;
+
+//     int one;
+//     int two;
+
+//     one = 0;
+//     two = 0;
+    
+//     all->sprites->texture_addr = mlx_xpm_file_to_image(all->engine.mlx, "sprites/block.xpm", &x, &y);
+
+//     int i = 0;
+//     int j = 0;
+
+//     while(i <= SCREEN_HEIGHT)
+//     {
+//         j = 0;
+//         one = 0;
+//         while(j <= SCREEN_WIDTH)
+//         {
+//             if (map[two][one] == 1)
+//             {
+//                 mlx_put_image_to_window(all->engine.mlx, all->engine.mlx_win, all->sprites[0].texture_addr, j, i);
+//             }
+//             j += 32;
+//             one++;
+//         }
+//         i += 32;
+//         two++;
+//     }
+// }
+
 int fill_wall(t_all *all)
 {
-    int x = 1;
-    int y = 1;
+    int x = 0;
+    int y = 0;
 
     int one;
     int two;
@@ -62,22 +104,25 @@ int fill_wall(t_all *all)
 
     int i = 0;
     int j = 0;
-    while(i <= SCREEN_HEIGHT)
+    
+    while(two < MAP_HEIGHT)
     {
         j = 0;
         one = 0;
-        while(j < SCREEN_WIDTH)
+        while(one < MAP_WIDTH)
         {
-            if (map[one][two] == 1)
+            if (map[two][one] == 1)
             {
-                mlx_put_image_to_window(all->engine.mlx, all->engine.mlx_win, all->sprites[0].texture_addr, i, j);
+                mlx_put_image_to_window(all->engine.mlx, all->engine.mlx_win, all->sprites[0].texture_addr, j, i);
             }
+            printf("map[%d][%d]=%d\n", two, one, map[two][one]);
             j += 32;
             one++;
         }
         i += 32;
         two++;
-        one = 0;
+
+
     }
 }
 
@@ -123,6 +168,6 @@ int main(void)
 
 	mlx_loop_hook(data.engine.mlx, &render, &data);
 
-
+    
     mlx_loop(data.engine.mlx);
 }
