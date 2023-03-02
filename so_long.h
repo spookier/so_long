@@ -19,17 +19,17 @@ typedef int				t_v2i __attribute__((vector_size (8)));
 
 //STRUCTS
 typedef struct	s_engine {
+	void	*mlx;
+	void	*mlx_win;
 	void	*img;
 	int		*img_addr;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	void	*mlx;
-	void	*mlx_win;
+	int		img_width;
+	int		img_height;
 	void 	*params;
-	int		width;
-	int		height;
 }				t_engine;
 
 
@@ -45,13 +45,11 @@ typedef struct s_pos2i {
 typedef struct s_sprite {
 
 	char	*texture_path;
-	int		width;
-	int		height;
-	int		line_length;
-
-	int			*texture_addr;
-	int			texture_line_length;
-	int			texture_bits_per_pixel;
+	int		*texture_addr;
+	int		texture_width;
+	int		texture_height;
+	int		texture_line_length;
+	int		texture_bits_per_pixel;
 
 }	t_sprite;
 
@@ -59,7 +57,7 @@ typedef struct s_sprite {
 typedef struct	s_all {
 
 	t_engine	engine;
-	t_sprite	sprites_wall;
+	t_sprite	sprites[8];
 	t_pos2i		pos;
 	
 	int         **map;
