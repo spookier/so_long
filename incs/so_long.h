@@ -5,16 +5,16 @@
 #include <stdlib.h>
 #include <math.h>
 #include <stdio.h>
-#include "mlx_linux/mlx.h"
-
-//COLORS
-# define WHITE 		0xFFFFFF
-# define RED 		0xFF0000
+#include "../mlx_linux/mlx.h"
 
 //SYSTEM
 # define ESC		0xFF1B
 
-typedef int				t_v2i __attribute__((vector_size (8)));
+// WINDOW
+#define SCREEN_HEIGHT 800
+#define SCREEN_WIDTH 600
+
+
 
 
 //STRUCTS
@@ -65,6 +65,9 @@ typedef struct	s_all {
 }				t_all;
 
 
+//so_long.c
+int 	render	(t_all *data);
+void    mlx_start(t_all *data);
 
 
 #endif
