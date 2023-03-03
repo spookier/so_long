@@ -12,9 +12,6 @@ int fill_player(t_all *all)
     two = 0;
     zero = 0;
     
-    
-    all->sprites[1].texture_addr = mlx_xpm_file_to_image(all->engine.mlx, "sprites/player.xpm", &zero, &zero);
-
     i = 0;
     while(two < MAP_HEIGHT)
     {
@@ -30,4 +27,5 @@ int fill_player(t_all *all)
         i += 32;
         two++;
     }
+    return(0);
 }
