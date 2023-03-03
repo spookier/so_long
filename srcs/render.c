@@ -26,7 +26,7 @@ static int load_sprites(t_all *all)
 {
 
     all->sprites[0].texture_addr = sprite_loader(all, "sprites/block.xpm");
-    all->sprites[1].texture_addr = sprite_loader(all, "sprites/player.xpm");
+    all->sprites[1].texture_addr = sprite_loader(all, "sprites/player2.xpm");
     all->sprites[2].texture_addr = sprite_loader(all, "sprites/sand.xpm");
 
     printf("[OK]Sprites loaded\n");
