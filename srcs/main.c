@@ -1,9 +1,25 @@
 #include "../incs/so_long.h"
 
+int map[MAP_HEIGHT][MAP_WIDTH] =
+	{
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 2, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+		
+};
+
+
 
 static void    mlx_start(t_all *data)
 {
-    printf("LOOP START!\n");
+    printf("MLX START!\n");
 
     data->engine.mlx = mlx_init();
     data->engine.mlx_win = mlx_new_window(data->engine.mlx, SCREEN_HEIGHT, SCREEN_WIDTH, "so long!");
@@ -22,8 +38,8 @@ int main(void)
 
 
     mlx_start(&data);
+    show_sprites(&data);
     
-
 	mlx_loop_hook(data.engine.mlx, &render, &data);
 
     

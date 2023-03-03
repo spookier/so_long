@@ -19,9 +19,10 @@ MLX = $(addprefix $(MLX_DIR)/, libmlx.a)
 
 
 # Mandatory files
-FILES =		$(SRCS_DIR)so_long.c \
+FILES =		$(SRCS_DIR)wall.c \
 			$(SRCS_DIR)render.c \
 			$(SRCS_DIR)player.c \
+			$(SRCS_DIR)background.c \
 			$(SRCS_DIR)main.c \
 			
 
