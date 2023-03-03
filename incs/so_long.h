@@ -13,9 +13,10 @@
 // WINDOW
 #define SCREEN_HEIGHT 800
 #define SCREEN_WIDTH 600
+#define MAP_HEIGHT 10
+#define MAP_WIDTH 10
 
-
-
+extern int map[MAP_HEIGHT][MAP_WIDTH];
 
 //STRUCTS
 typedef struct	s_engine {
@@ -53,6 +54,13 @@ typedef struct s_sprite {
 
 }	t_sprite;
 
+typedef struct s_player {
+
+	char *texture_path;
+	int pos_x;
+	int pos_y;
+} t_player;
+
 
 typedef struct	s_all {
 
@@ -65,9 +73,9 @@ typedef struct	s_all {
 }				t_all;
 
 
-//so_long.c
-int 	render	(t_all *data);
-void    mlx_start(t_all *data);
 
+int 	render(t_all *data);
+int 	fill_player(t_all *all);
+int 	fill_wall(t_all *all);
 
 #endif

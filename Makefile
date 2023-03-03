@@ -20,6 +20,7 @@ MLX = $(addprefix $(MLX_DIR)/, libmlx.a)
 
 # Mandatory files
 FILES =		$(SRCS_DIR)so_long.c \
+			$(SRCS_DIR)render.c \
 			$(SRCS_DIR)player.c \
 			$(SRCS_DIR)main.c \
 			
@@ -33,11 +34,14 @@ OBJ_FILES = $(FILES:.c=.o)
 
 all : $(NAME)
 
+
 $(NAME) : $(MLX) $(OBJ_FILES)
 	$(CC) $(CFLAGS) $^ -o $@ -I$(INCS_DIR) -L$(MLX_DIR) -lmlx $(MLX_FLAGS)
 
+
 $(MLX):
 	make -C $(MLX_DIR)
+
 
 # Clean all object files created
 clean : 
@@ -52,6 +56,9 @@ fclean : clean
 #Fclean then build all
 re : fclean
 	make all
+
+ex :
+	make all && ./so_long
 
 
 .PHONY : all clean fclean re
