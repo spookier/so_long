@@ -2,7 +2,6 @@
 
 int render (t_all *data)
 {
-    mlx_key_hook(data->engine.mlx_win, move_player, &data);
     //usleep(1000000);
     return (0);
 }

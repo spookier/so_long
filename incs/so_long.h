@@ -78,7 +78,7 @@ int 	render(t_all *data);
 int 	fill_player(t_all *all);
 int 	fill_wall(t_all *all);
 int 	fill_background(t_all *all);
-int		move_player(t_all *all, int keycode);
+int 	key_hook(t_all *all, int key);
 
 
 

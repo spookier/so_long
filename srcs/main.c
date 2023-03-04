@@ -27,10 +27,11 @@ static void    mlx_start(t_all *data)
     data->engine.addr = mlx_get_data_addr(data->engine.img, &data->engine.bits_per_pixel, &data->engine.line_length,
                                          &data->engine.endian);
     mlx_put_image_to_window(data->engine.mlx, data->engine.mlx_win, data->engine.img, 0, 0);
-	//mlx_key_hook(data->engine.mlx_win, move_player, &data);
 
     
 }
+
+
 
 
 
@@ -44,6 +45,7 @@ int main(void)
     
 	mlx_loop_hook(data.engine.mlx, &render, &data);
 
+	mlx_key_hook(data.engine.mlx_win, key_hook, &data);
 
     
     mlx_loop(data.engine.mlx);
