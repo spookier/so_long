@@ -1,10 +1,13 @@
 #include "../incs/so_long.h"
 
+
+
 int render (t_all *data)
 {
     //usleep(1000000);
     return (0);
 }
+
 
 
 static int *sprite_loader(t_all *all, char *texture_path)
@@ -21,6 +24,8 @@ static int *sprite_loader(t_all *all, char *texture_path)
     return (texture);
 }
 
+
+
 static int load_sprites(t_all *all)
 {
     all->sprites[0].texture_addr = sprite_loader(all, "sprites/block.xpm");
@@ -31,16 +36,26 @@ static int load_sprites(t_all *all)
     return(0);
 }
 
+
+
 int show_sprites(t_all *data)
 {
     load_sprites(data);
 
     fill_background(data);
     fill_wall(data);
-    fill_player(data);
+    spawn_player(data);
 
     printf("[OK]Showing sprites\n");
     return(0);
 }
 
 
+
+int redraw(t_all *data)
+{
+    fill_background(data);
+    fill_wall(data);
+
+    printf("redrawing walls + background\n");
+}
