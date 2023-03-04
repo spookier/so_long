@@ -16,6 +16,7 @@
 #define SCREEN_WIDTH 600
 #define MAP_HEIGHT 10
 #define MAP_WIDTH 10
+#define TILE_SIZE 32
 
 extern int map[MAP_HEIGHT][MAP_WIDTH];
 
@@ -39,8 +40,6 @@ typedef struct	s_engine {
 typedef struct s_pos2i {
 	int x;
 	int y;
-	int x1;
-	int y1;
 }		t_pos2i;
 
 
@@ -67,7 +66,7 @@ typedef struct	s_all {
 
 	t_engine	engine;
 	t_sprite	sprites[8];
-	t_pos2i		pos;
+	t_pos2i		player_pos;
 	
 	int         **map;
 
@@ -76,11 +75,11 @@ typedef struct	s_all {
 
 int		show_sprites(t_all *data);
 int 	render(t_all *data);
-int 	fill_player(t_all *all);
+int 	spawn_player(t_all *all);
 int 	fill_wall(t_all *all);
 int 	fill_background(t_all *all);
-int 	key_hook(int keycode, t_engine *mlx);
-
-
+int		key_hook(int keycode, t_all *all);
+int		redraw(t_all *data);
+int		update_player(t_all *data);
 
 #endif
