@@ -34,7 +34,6 @@ static void    mlx_start(t_all *data)
 
 
 
-
 int main(void)
 {
     t_all data;
@@ -45,8 +44,7 @@ int main(void)
     
 	mlx_loop_hook(data.engine.mlx, &render, &data);
 
-	mlx_key_hook(data.engine.mlx_win, key_hook, &data);
-
+	mlx_key_hook(data.engine.mlx_win, key_hook, &data.engine);
     
     mlx_loop(data.engine.mlx);
 }

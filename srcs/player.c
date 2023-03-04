@@ -30,9 +30,15 @@ int fill_player(t_all *all)
 }
 
 
-int key_hook(t_all *data, int key)
+int key_hook(int keycode, t_engine *mlx)
 {
-    if(key == 135)
+    printf("%d\n", keycode);
+    if(keycode == KEY_W)
         printf("W button pressed!\n");
+    if (keycode == ESC)
+    {
+        /* don't  forget to free everything */
+        exit (1);
+    }
     return (0);
 }
