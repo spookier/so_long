@@ -6,6 +6,7 @@
 #include <math.h>
 #include <stdio.h>
 #include "../mlx_linux/mlx.h"
+#include "./keycodes.h"
 
 //SYSTEM
 # define ESC		0xFF1B
@@ -78,7 +79,7 @@ int 	render(t_all *data);
 int 	fill_player(t_all *all);
 int 	fill_wall(t_all *all);
 int 	fill_background(t_all *all);
-int 	key_hook(t_all *all, int key);
+int 	key_hook(int keycode, t_engine *mlx);
 
 
 
