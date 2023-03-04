@@ -11,7 +11,6 @@ int fill_player(t_all *all)
     one = 0;
     two = 0;
     zero = 0;
-    
     i = 0;
     while(two < MAP_HEIGHT)
     {
@@ -28,4 +27,21 @@ int fill_player(t_all *all)
         two++;
     }
     return(0);
+}
+
+
+int	key_hook(t_all *data, int keycode)
+{
+	printf("Hello from key_hook!\n");
+	return (0);
+}
+
+
+int move_player(t_all *all, int keycode)
+{
+    if (keycode == 13) // 13 is the keycode for the W key
+	{
+		printf("W key pressed!\n");
+	}
+	return (0);
 }

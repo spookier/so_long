@@ -2,7 +2,7 @@
 
 int render (t_all *data)
 {
-
+    mlx_key_hook(data->engine.mlx_win, move_player, &data);
     //usleep(1000000);
     return (0);
 }
@@ -24,9 +24,8 @@ static int *sprite_loader(t_all *all, char *texture_path)
 
 static int load_sprites(t_all *all)
 {
-
     all->sprites[0].texture_addr = sprite_loader(all, "sprites/block.xpm");
-    all->sprites[1].texture_addr = sprite_loader(all, "sprites/player2.xpm");
+    all->sprites[1].texture_addr = sprite_loader(all, "sprites/player3.xpm");
     all->sprites[2].texture_addr = sprite_loader(all, "sprites/sand.xpm");
 
     printf("[OK]Sprites loaded\n");
