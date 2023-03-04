@@ -30,18 +30,9 @@ int fill_player(t_all *all)
 }
 
 
-int	key_hook(t_all *data, int keycode)
+int key_hook(t_all *data, int key)
 {
-	printf("Hello from key_hook!\n");
-	return (0);
-}
-
-
-int move_player(t_all *all, int keycode)
-{
-    if (keycode == 13) // 13 is the keycode for the W key
-	{
-		printf("W key pressed!\n");
-	}
-	return (0);
+    if(key == 135)
+        printf("W button pressed!\n");
+    return (0);
 }
