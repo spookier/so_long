@@ -54,6 +54,4 @@ int redraw(t_all *data)
 {
     fill_background(data);
     fill_wall(data);
-
-    printf("redrawing walls + background\n\n\n");
 }
