@@ -27,6 +27,8 @@ static void    mlx_start(t_all *data)
     data->engine.img = mlx_new_image(data->engine.mlx, SCREEN_HEIGHT, SCREEN_WIDTH);
     data->engine.addr = mlx_get_data_addr(data->engine.img, &data->engine.bits_per_pixel, &data->engine.line_length,
                                          &data->engine.endian);
+
+
 }
 
 
