@@ -1,7 +1,6 @@
 #include "../incs/so_long.h"
 
 
-
 int spawn_player(t_all *all)
 {
 
@@ -26,7 +25,6 @@ int spawn_player(t_all *all)
                 mlx_put_image_to_window(all->engine.mlx, all->engine.mlx_win, all->sprites[1].texture_addr, j, i);
                 all->player_pos.y = i;
                 all->player_pos.x = j;
-                printf("player spawned @ x%d y%d\n", j, i);
             }
             j += 32;
             one++;
@@ -44,7 +42,6 @@ int update_player(t_all *all)
     mlx_clear_window(all->engine.mlx, all->engine.mlx_win);
 
     redraw(all);
-    printf("moving player y = %d %d\n", all->player_pos.y, all->player_pos.x);
     mlx_put_image_to_window(all->engine.mlx, all->engine.mlx_win, all->sprites[1].texture_addr, all->player_pos.x, all->player_pos.y);
 }
 
@@ -52,7 +49,6 @@ int update_player(t_all *all)
 int move_player_up(t_all *all)
 {
     all->player_pos.y -= 32;
-    printf("moving player y = %d\n", all->player_pos.y);
     update_player(all);
 }
 
@@ -60,7 +56,6 @@ int move_player_up(t_all *all)
 int move_player_down(t_all *all)
 {
     all->player_pos.y += 32;
-    printf("moving player y = %d\n", all->player_pos.y);
     update_player(all);
 }
 
