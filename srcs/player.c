@@ -43,6 +43,7 @@ int spawn_player(t_all *all)
 
 int update_player(t_all *all)
 {
+    mlx_clear_window(all->engine.mlx, all->engine.mlx_win);
     printf("x = %d i = %d\n", all->player_pos.x, all->player_pos.y);
     int x = all->player_pos.x;
     int y = all->player_pos.y;
@@ -83,6 +84,9 @@ int key_hook(int keycode, t_all *all)
 
     if (keycode == ESC)
     {
+        mlx_clear_window(all->engine.mlx, all->engine.mlx_win);
+        mlx_destroy_window(all->engine.mlx, all->engine.mlx_win);
+
         /* don't  forget to free everything */
         exit (1);
     }
