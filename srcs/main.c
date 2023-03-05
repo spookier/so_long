@@ -27,8 +27,7 @@ static void    mlx_start(t_all *data)
     data->engine.img = mlx_new_image(data->engine.mlx, SCREEN_HEIGHT, SCREEN_WIDTH);
     data->engine.addr = mlx_get_data_addr(data->engine.img, &data->engine.bits_per_pixel, &data->engine.line_length,
                                          &data->engine.endian);
-    mlx_put_image_to_window(data->engine.mlx, data->engine.mlx_win, data->engine.img, 0, 0);
-    
+	printf("abdc\n");
 }
 
 
@@ -38,13 +37,12 @@ int main(void)
 {
     t_all data;
 
-
     mlx_start(&data);
 
 	//start initializing sprites
     show_sprites(&data);
     
-	mlx_loop_hook(data.engine.mlx, &render, &data);
+	//mlx_loop_hook(data.engine.mlx, &render, &data);
 	mlx_key_hook(data.engine.mlx_win, key_hook, &data.engine);
 
 
