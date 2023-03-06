@@ -56,12 +56,6 @@ int update_player(t_all *all)
     all->move_counter++;
     printf("moves: %d\n", all->move_counter);
 
-    if(map[(all->player_pos.y)/32][(all->player_pos.x)/32] == 3)
-    {
-        /*  */
-        exit(0);
-    }
-
 }
 
 

@@ -27,5 +27,19 @@ int fill_exit(t_all *all)
         i += 32;
         two++;
     }
+        spawn_exit(all);
     return(0);
 }
+
+int spawn_exit(t_all *all)
+{
+    printf("exit flag = %d\n", all->exit_flag);
+
+    if(all->exit_flag == 1 && map[(all->player_pos.y)/32][(all->player_pos.x)/32] == 3)
+    {
+            exit(0);
+    }
+    return(0);
+}
+
+

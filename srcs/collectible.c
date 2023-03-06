@@ -46,8 +46,8 @@ int eat_collectible(t_all *all)
 
     if(all->collectible_counter - 1 == 0)
         all->exit_flag = 1;
-    else
-        all->collectible_counter--;
+
+    all->collectible_counter--;
 
     printf("collectibles remaining: %d\n", all->collectible_counter);
 
