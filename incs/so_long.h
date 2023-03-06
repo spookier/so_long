@@ -74,7 +74,6 @@ typedef struct	s_all {
 int		key_hook(int keycode, t_all *all);
 
 int		show_sprites(t_all *data);
-int 	render(t_all *data);
 int		redraw(t_all *data);
 
 int 	spawn_player(t_all *all);
@@ -86,5 +85,6 @@ int 	fill_exit(t_all *all);
 int 	fill_collectible(t_all *all);
 
 int 	check_collectible(t_all *all);
+
 
 #endif

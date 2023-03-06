@@ -1,4 +1,4 @@
-#include "../incs/so_long.h"
+#include "../../incs/so_long.h"
 
 
 

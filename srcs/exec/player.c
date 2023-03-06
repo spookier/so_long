@@ -1,4 +1,4 @@
-#include "../incs/so_long.h"
+#include "../../incs/so_long.h"
 
 
 int spawn_player(t_all *all)
@@ -34,7 +34,7 @@ int spawn_player(t_all *all)
     }
 
     //PRINT MAP
-	all->exit_flag = 0;
+	
     all->move_counter = 0;
     printf("moves: %d\n", all->move_counter);
     printf("total collectibles: %d\n", all->collectible_counter);
@@ -48,7 +48,10 @@ int update_player(t_all *all)
 {
     check_collectible(all);
 
+    
     redraw(all);
+    if(all->exit_flag == 1)
+        fill_exit(all);
     mlx_put_image_to_window(all->engine.mlx, all->engine.mlx_win, all->sprites[1].texture_addr, all->player_pos.x, all->player_pos.y);
     all->move_counter++;
     printf("moves: %d\n", all->move_counter);
