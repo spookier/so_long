@@ -6,13 +6,13 @@ int map[MAP_HEIGHT][MAP_WIDTH] =
 	{
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 1, 3, 0, 0, 4, 0, 0, 1},
+		{1, 0, 1, 3, 0, 4, 0, 0, 0, 1},
 		{1, 0, 1, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 1, 1, 1, 0, 0, 4, 0, 1},
+		{1, 0, 1, 1, 1, 0, 2, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 4, 4, 4, 0, 0, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 4, 4, 0, 0, 0, 2, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 4, 1},
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 };
 
@@ -26,7 +26,6 @@ static void    mlx_start(t_all *data)
     data->engine.img = mlx_new_image(data->engine.mlx, SCREEN_HEIGHT, SCREEN_WIDTH);
     data->engine.addr = mlx_get_data_addr(data->engine.img, &data->engine.bits_per_pixel, &data->engine.line_length,
                                          &data->engine.endian);
-
 
 }
 
