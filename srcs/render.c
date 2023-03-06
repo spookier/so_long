@@ -44,7 +44,6 @@ int show_sprites(t_all *data)
 
     fill_background(data);
     fill_wall(data);
-    fill_exit(data);
     fill_collectible(data);
     spawn_player(data);
 
@@ -58,6 +57,8 @@ int redraw(t_all *data)
 {
     fill_background(data);
     fill_wall(data);
-
     fill_collectible(data);
+    
+    if(data->exit_flag == 1)
+        fill_exit(data);
 }

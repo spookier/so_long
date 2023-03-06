@@ -63,10 +63,13 @@ typedef struct	s_all {
 	t_pos2i		player_pos;
 	int 		move_counter;
 	int			collectible_counter;
-	
+	int			exit_flag;
 	int         **map;
 
 }				t_all;
+
+
+
 
 int		key_hook(int keycode, t_all *all);
 
