@@ -34,9 +34,8 @@ int spawn_player(t_all *all)
     }
 
     //PRINT MAP
-    print_map();
-    all->counter = 0;
-    printf("moves: %d\n", all->counter);
+    all->move_counter = 0;
+    printf("moves: %d\n", all->move_counter);
 
     return(0);
 }
@@ -49,13 +48,14 @@ int update_player(t_all *all)
 
     redraw(all);
     mlx_put_image_to_window(all->engine.mlx, all->engine.mlx_win, all->sprites[1].texture_addr, all->player_pos.x, all->player_pos.y);
-    all->counter++;
-    printf("moves: %d\n", all->counter);
+    all->move_counter++;
+    printf("moves: %d\n", all->move_counter);
     if(map[(all->player_pos.y)/32][(all->player_pos.x)/32] == 3)
     {
         /*  */
         exit(0);
     }
+    check_collectible(all);
 }
 
 
@@ -67,6 +67,7 @@ int move_player_up(t_all *all)
     
         update_player(all);
     }
+
 
 }
 
@@ -123,18 +124,4 @@ int key_hook(int keycode, t_all *all)
         exit (1);
     }
     return (0);
-}
-
-
-void print_map()
-{
-    
-    int i, j;
-    for (i = 0; i < MAP_HEIGHT; i++) {
-        for (j = 0; j < MAP_WIDTH; j++) {
-            printf("%d ", map[i][j]);
-        }
-        printf("\n");
-    }
-    printf("\n");
 }
