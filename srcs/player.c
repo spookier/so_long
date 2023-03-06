@@ -46,9 +46,6 @@ int spawn_player(t_all *all)
 
 int update_player(t_all *all)
 {
-   
-    mlx_clear_window(all->engine.mlx, all->engine.mlx_win);
-
     check_collectible(all);
 
     redraw(all);
