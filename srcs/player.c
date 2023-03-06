@@ -3,7 +3,6 @@
 
 int spawn_player(t_all *all)
 {
-
     int zero;
     int one;
     int two;
@@ -14,6 +13,7 @@ int spawn_player(t_all *all)
     two = 0;
     zero = 0;
     i = 0;
+
     while(two < MAP_HEIGHT)
     {
         j = 0;
@@ -34,8 +34,11 @@ int spawn_player(t_all *all)
     }
 
     //PRINT MAP
+	all->exit_flag = 0;
     all->move_counter = 0;
     printf("moves: %d\n", all->move_counter);
+    printf("total collectibles: %d\n", all->collectible_counter);
+
 
     return(0);
 }
@@ -46,16 +49,19 @@ int update_player(t_all *all)
    
     mlx_clear_window(all->engine.mlx, all->engine.mlx_win);
 
+    check_collectible(all);
+
     redraw(all);
     mlx_put_image_to_window(all->engine.mlx, all->engine.mlx_win, all->sprites[1].texture_addr, all->player_pos.x, all->player_pos.y);
     all->move_counter++;
     printf("moves: %d\n", all->move_counter);
+
     if(map[(all->player_pos.y)/32][(all->player_pos.x)/32] == 3)
     {
         /*  */
         exit(0);
     }
-    check_collectible(all);
+
 }
 
 
@@ -67,8 +73,6 @@ int move_player_up(t_all *all)
     
         update_player(all);
     }
-
-
 }
 
 
