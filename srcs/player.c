@@ -35,8 +35,8 @@ int spawn_player(t_all *all)
 
     //PRINT MAP
     print_map();
-
-    printf("player spawned at pos = x%d y%d\n", all->player_pos.y, all->player_pos.x);
+    all->counter = 0;
+    printf("moves: %d\n", all->counter);
 
     return(0);
 }
@@ -44,11 +44,18 @@ int spawn_player(t_all *all)
 
 int update_player(t_all *all)
 {
+   
     mlx_clear_window(all->engine.mlx, all->engine.mlx_win);
 
     redraw(all);
     mlx_put_image_to_window(all->engine.mlx, all->engine.mlx_win, all->sprites[1].texture_addr, all->player_pos.x, all->player_pos.y);
-    printf("player moved at pos = x%d y%d\n", all->player_pos.y, all->player_pos.x);
+    all->counter++;
+    printf("moves: %d\n", all->counter);
+    if(map[(all->player_pos.y)/32][(all->player_pos.x)/32] == 3)
+    {
+        /*  */
+        exit(0);
+    }
 }
 
 
@@ -60,6 +67,7 @@ int move_player_up(t_all *all)
     
         update_player(all);
     }
+
 }
 
 

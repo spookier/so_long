@@ -55,19 +55,13 @@ typedef struct s_sprite {
 
 }	t_sprite;
 
-typedef struct s_player {
-
-	char *texture_path;
-	int pos_x;
-	int pos_y;
-} t_player;
-
 
 typedef struct	s_all {
 
 	t_engine	engine;
 	t_sprite	sprites[8];
 	t_pos2i		player_pos;
+	int 		counter;
 	
 	int         **map;
 
@@ -79,6 +73,8 @@ int 	render(t_all *data);
 int 	spawn_player(t_all *all);
 int 	fill_wall(t_all *all);
 int 	fill_background(t_all *all);
+int 	fill_exit(t_all *all);
+int 	fill_collectible(t_all *all);
 int		key_hook(int keycode, t_all *all);
 int		redraw(t_all *data);
 int		update_player(t_all *data);
