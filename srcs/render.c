@@ -58,6 +58,6 @@ int redraw(t_all *data)
 {
     fill_background(data);
     fill_wall(data);
-    fill_exit(data);
+
     fill_collectible(data);
 }
