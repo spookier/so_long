@@ -28,9 +28,11 @@ static int *sprite_loader(t_all *all, char *texture_path)
 
 static int load_sprites(t_all *all)
 {
-    all->sprites[0].texture_addr = sprite_loader(all, "sprites/block.xpm");
-    all->sprites[1].texture_addr = sprite_loader(all, "sprites/player4.xpm");
-    all->sprites[2].texture_addr = sprite_loader(all, "sprites/sand.xpm");
+    all->sprites[0].texture_addr = sprite_loader(all, "sprites/block_.xpm");
+    all->sprites[1].texture_addr = sprite_loader(all, "sprites/player_.xpm");
+    all->sprites[2].texture_addr = sprite_loader(all, "sprites/sand_.xpm");
+    all->sprites[3].texture_addr = sprite_loader(all, "sprites/exit_.xpm");
+    all->sprites[4].texture_addr = sprite_loader(all, "sprites/collectible_.xpm");
     return(0);
 }
 
@@ -42,6 +44,8 @@ int show_sprites(t_all *data)
 
     fill_background(data);
     fill_wall(data);
+    fill_exit(data);
+    fill_collectible(data);
     spawn_player(data);
 
     printf("[OK]SPRITES INITIALIZED!\n");
@@ -54,4 +58,6 @@ int redraw(t_all *data)
 {
     fill_background(data);
     fill_wall(data);
+    fill_exit(data);
+    fill_collectible(data);
 }

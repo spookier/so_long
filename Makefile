@@ -23,6 +23,8 @@ FILES =		$(SRCS_DIR)wall.c \
 			$(SRCS_DIR)render.c \
 			$(SRCS_DIR)player.c \
 			$(SRCS_DIR)background.c \
+			$(SRCS_DIR)exit.c \
+			$(SRCS_DIR)collectible.c \
 			$(SRCS_DIR)main.c \
 			
 
