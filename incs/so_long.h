@@ -16,6 +16,7 @@
 #define SCREEN_WIDTH 600
 #define MAP_HEIGHT 10
 #define MAP_WIDTH 10
+
 #define TILE_SIZE 32
 
 extern int map[MAP_HEIGHT][MAP_WIDTH];
