@@ -12,10 +12,10 @@
 # define ESC		0xFF1B
 
 // WINDOW
-#define SCREEN_HEIGHT 800
-#define SCREEN_WIDTH 600
-#define MAP_HEIGHT 10
-#define MAP_WIDTH 10
+#define SCREEN_HEIGHT 1080
+#define SCREEN_WIDTH 1080
+#define MAP_HEIGHT 30
+#define MAP_WIDTH 30
 
 #define TILE_SIZE 32
 
