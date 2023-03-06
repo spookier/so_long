@@ -1,4 +1,4 @@
-#include "../incs/so_long.h"
+#include "../../incs/so_long.h"
 
 int fill_collectible(t_all *all)
 {

@@ -1,4 +1,4 @@
-#include "../incs/so_long.h"
+#include "../../incs/so_long.h"
 
 
 
@@ -42,10 +42,12 @@ int show_sprites(t_all *data)
 {
     load_sprites(data);
 
+    data->exit_flag = 0;
     fill_background(data);
     fill_wall(data);
     fill_collectible(data);
     spawn_player(data);
+
 
     printf("[OK]SPRITES INITIALIZED!\n");
     return(0);
@@ -59,6 +61,5 @@ int redraw(t_all *data)
     fill_wall(data);
     fill_collectible(data);
     
-    if(data->exit_flag == 1)
-        fill_exit(data);
+    
 }
