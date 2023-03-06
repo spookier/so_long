@@ -33,6 +33,11 @@ int spawn_player(t_all *all)
         two++;
     }
 
+    //PRINT MAP
+    print_map();
+
+    printf("player spawned at pos = x%d y%d\n", all->player_pos.y, all->player_pos.x);
+
     return(0);
 }
 
@@ -43,32 +48,50 @@ int update_player(t_all *all)
 
     redraw(all);
     mlx_put_image_to_window(all->engine.mlx, all->engine.mlx_win, all->sprites[1].texture_addr, all->player_pos.x, all->player_pos.y);
+    printf("player moved at pos = x%d y%d\n", all->player_pos.y, all->player_pos.x);
 }
 
 
 int move_player_up(t_all *all)
 {
-    all->player_pos.y -= 32;
-    update_player(all);
+    if (map[(all->player_pos.y - 32)/32][(all->player_pos.x)/32] != 1)
+    {
+        all->player_pos.y -= 32;
+    
+        update_player(all);
+    }
 }
 
 
 int move_player_down(t_all *all)
 {
-    all->player_pos.y += 32;
-    update_player(all);
+    if (map[(all->player_pos.y + 32)/32][(all->player_pos.x)/32] != 1)
+    {
+        all->player_pos.y += 32;
+    
+        update_player(all);
+    }
+
 }
 
 int move_player_left(t_all *all)
 {
-    all->player_pos.x -= 32;
-    update_player(all);
+    if (map[(all->player_pos.y)/32][(all->player_pos.x - 32)/32] != 1)
+    {
+        all->player_pos.x -= 32;
+    
+        update_player(all);
+    }
 }
 
 int move_player_right(t_all *all)
 {
-    all->player_pos.x += 32;
-    update_player(all);
+     if (map[(all->player_pos.y)/32][(all->player_pos.x + 32)/32] != 1)
+    {
+        all->player_pos.x += 32;
+    
+        update_player(all);
+    }
 }
 
 
@@ -92,4 +115,18 @@ int key_hook(int keycode, t_all *all)
         exit (1);
     }
     return (0);
+}
+
+
+void print_map()
+{
+    
+    int i, j;
+    for (i = 0; i < MAP_HEIGHT; i++) {
+        for (j = 0; j < MAP_WIDTH; j++) {
+            printf("%d ", map[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
 }
