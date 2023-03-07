@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acostin <acostin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 13:38:02 by acostin           #+#    #+#             */
-/*   Updated: 2023/01/11 13:38:18 by acostin          ###   ########.fr       */
+/*   Created: 2022/11/09 11:11:05 by acostin           #+#    #+#             */
+/*   Updated: 2022/12/15 17:49:19 by acostin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 2
-# endif
-
-char	*get_next_line(int fd);
-char	*read_line(int fd, char *backup);
-size_t	ft_strlen(char *s);
-char	*ft_strchr(char *s, int c);
-char	*ft_strjoin(char *backup, char *buf);
-char	*get_line(char *backup);
-char	*new_storage(char *backup);
-
-#endif
+	i = 0;
+	while (s && s[i])
+		i++;
+	return (i);
+}

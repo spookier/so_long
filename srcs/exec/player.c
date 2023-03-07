@@ -35,7 +35,7 @@ int spawn_player(t_all *all)
 
     //PRINT MAP
     
-    printf("moves: %d\n", all->move_counter);
+    ft_printf("moves: %d\n", all->move_counter);
 
 
     return(0);

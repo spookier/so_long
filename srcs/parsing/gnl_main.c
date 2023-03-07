@@ -1,6 +1,8 @@
+#include "../../libft/incs/get_next_line.h"
+#include "../../libft/incs/libft.h"
+#include "../../libft/incs/ft_printf.h"
 #include <fcntl.h>
-#include "get_next_line.h"
-#include <stdio.h>
+//#include "../../incs/so_long.h"
 
 
 int count_chars(char *line)
@@ -61,15 +63,15 @@ int check_arg(char *argv)
 	len = ft_strlen(argv);
 	if (len <= 4)
 	{
-		printf("File extension error");
+		ft_printf("File extension error");
 		return (1);
 	}
 	
-	if (strcmp(argv + len - 4, ".ber") != 0)
-	{
-    printf("File extension error");
-    return 1;
-}
+	// if (ft_strcmp(argv + len - 4, ".ber") != 0)
+	// {
+    // 	printf("File extension error");
+    // 	return 1;
+	// }
 
 	return(0);
 }

@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(char *s)
+size_t	gnl_ft_strlen(char *s)
 {
 	size_t	i;
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(char *s)
 	return (i);
 }
 
-char	*ft_strchr(char *s, int c)
+char	*gnl_ft_strchr(char *s, int c)
 {
 	int	i;
 
@@ -32,7 +32,7 @@ char	*ft_strchr(char *s, int c)
 	if (!s)
 		return (0);
 	if (c == '\0')
-		return ((char *)&s[ft_strlen(s)]);
+		return ((char *)&s[gnl_ft_strlen(s)]);
 	while (s[i] != '\0')
 	{
 		if (s[i] == (char)c)
@@ -42,7 +42,7 @@ char	*ft_strchr(char *s, int c)
 	return (0);
 }
 
-char	*ft_strjoin(char *storage, char *buf)
+char	*gnl_ft_strjoin(char *storage, char *buf)
 {
 	size_t	i;
 	size_t	j;
@@ -55,7 +55,7 @@ char	*ft_strjoin(char *storage, char *buf)
 	}
 	if (!storage || !buf)
 		return (NULL);
-	new_str = malloc(sizeof(char) * ((ft_strlen(storage) + ft_strlen(buf))
+	new_str = malloc(sizeof(char) * ((gnl_ft_strlen(storage) + gnl_ft_strlen(buf))
 				+ 1));
 	if (new_str == NULL)
 		return (NULL);
@@ -66,7 +66,7 @@ char	*ft_strjoin(char *storage, char *buf)
 			new_str[i] = storage[i];
 	while (buf[j] != '\0')
 		new_str[i++] = buf[j++];
-	new_str[ft_strlen(storage) + ft_strlen(buf)] = '\0';
+	new_str[gnl_ft_strlen(storage) + gnl_ft_strlen(buf)] = '\0';
 	free(storage);
 	return (new_str);
 }
@@ -113,7 +113,7 @@ char	*new_storage(char *storage)
 		free(storage);
 		return (NULL);
 	}
-	new_storage = (char *)malloc(sizeof(char) * (ft_strlen(storage) - i + 1));
+	new_storage = (char *)malloc(sizeof(char) * (gnl_ft_strlen(storage) - i + 1));
 	if (!storage)
 		return (NULL);
 	i++;

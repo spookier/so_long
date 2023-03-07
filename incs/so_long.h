@@ -1,10 +1,14 @@
 #ifndef FT_SO_LONG_H
 # define FT_SO_LONG_H
 
-#include "unistd.h"
+#include <unistd.h>
 #include <stdlib.h>
 #include <math.h>
 #include <stdio.h>
+#include <fcntl.h>
+#include "../libft/incs/get_next_line.h"
+#include "../libft/incs/libft.h"
+#include "../libft/incs/ft_printf.h"
 #include "../mlx_linux/mlx.h"
 #include "./keycodes.h"
 
