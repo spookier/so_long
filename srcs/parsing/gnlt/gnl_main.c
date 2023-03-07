@@ -21,7 +21,7 @@ int check_rectangle(int fd, char *line, int count, int length)
 	{
 		if (length != count_chars(line))
 		{
-			printf("error\n");
+			printf("Error\n");
 			free(line);
 			close(fd);
 			return (1);
@@ -30,7 +30,7 @@ int check_rectangle(int fd, char *line, int count, int length)
 	return(length);
 }
 
-void check_gnl(int fd, char *line)
+void check_line(int fd, char *line)
 {
 	int length;
 	int count;
@@ -54,17 +54,41 @@ void check_gnl(int fd, char *line)
 	}
 }
 
+int check_arg(char *argv)
+{
+	int len;
 
-int main(void)
+	len = ft_strlen(argv);
+	if (len <= 4)
+	{
+		printf("File extension error");
+		return (1);
+	}
+	
+	if (strcmp(argv + len - 4, ".ber") != 0)
+	{
+    printf("File extension error");
+    return 1;
+}
+
+	return(0);
+}
+
+int main(int argc, char **argv)
 {
 	int fd;
 	char *line;
 
+	if(argc != 2)
+		return(1);
+
 	line = NULL;
 	fd = open("test.txt", O_RDONLY);
 
-	check_gnl(fd, line);
+	check_arg(argv[1]);
+	check_line(fd, line);
 
+	
 	close(fd);
 	return(0);
 }

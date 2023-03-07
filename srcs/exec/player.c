@@ -54,6 +54,7 @@ int update_player(t_all *all)
     all->move_counter++;
     printf("moves: %d\n", all->move_counter);
 
+    return(0);
 }
 
 
@@ -65,6 +66,8 @@ int move_player_up(t_all *all)
     
         update_player(all);
     }
+        return(0);
+
 }
 
 
@@ -76,6 +79,8 @@ int move_player_down(t_all *all)
     
         update_player(all);
     }
+        return(0);
+
 
 }
 
@@ -87,6 +92,8 @@ int move_player_left(t_all *all)
     
         update_player(all);
     }
+        return(0);
+
 }
 
 int move_player_right(t_all *all)
@@ -97,6 +104,8 @@ int move_player_right(t_all *all)
     
         update_player(all);
     }
+        return(0);
+
 }
 
 
