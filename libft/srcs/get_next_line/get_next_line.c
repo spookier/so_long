@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../../incs/get_next_line.h"
 
 
 //join storage and buffer together
