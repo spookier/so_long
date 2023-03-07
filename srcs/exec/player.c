@@ -34,10 +34,8 @@ int spawn_player(t_all *all)
     }
 
     //PRINT MAP
-	
-    all->move_counter = 0;
+    
     printf("moves: %d\n", all->move_counter);
-    printf("total collectibles: %d\n", all->collectible_counter);
 
 
     return(0);

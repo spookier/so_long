@@ -43,6 +43,7 @@ int show_sprites(t_all *data)
     load_sprites(data);
 
     data->exit_flag = 0;
+    data->move_counter = 0;
     fill_background(data);
     fill_wall(data);
     fill_collectible(data);
