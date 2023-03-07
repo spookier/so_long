@@ -1,8 +1,8 @@
-#include "../../libft/incs/get_next_line.h"
-#include "../../libft/incs/libft.h"
-#include "../../libft/incs/ft_printf.h"
-#include <fcntl.h>
-//#include "../../incs/so_long.h"
+// #include "../../libft/incs/get_next_line.h"
+// #include "../../libft/incs/libft.h"
+// #include "../../libft/incs/ft_printf.h"
+// #include <fcntl.h>
+#include "../../incs/so_long.h"
 
 
 int count_chars(char *line)

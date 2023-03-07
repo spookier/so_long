@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
+#include "../../incs/libft.h"
+
 
 static int	calc_size(int n)
 {
