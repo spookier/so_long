@@ -3,7 +3,6 @@
 
 int spawn_player(t_all *all)
 {
-    int zero;
     int one;
     int two;
     int i;
@@ -11,7 +10,6 @@ int spawn_player(t_all *all)
 
     one = 0;
     two = 0;
-    zero = 0;
     i = 0;
 
     while(two < MAP_HEIGHT)
@@ -36,7 +34,6 @@ int spawn_player(t_all *all)
     //PRINT MAP
     
     ft_printf("moves: %d\n", all->move_counter);
-
 
     return(0);
 }

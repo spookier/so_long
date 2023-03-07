@@ -14,7 +14,6 @@ static int spawn_exit(t_all *all)
 
 int fill_exit(t_all *all)
 {
-    int zero;
     int one;
     int two;
     int i;
@@ -22,7 +21,6 @@ int fill_exit(t_all *all)
 
     one = 0;
     two = 0;
-    zero = 0;
  
     i = 0;
     while(two < MAP_HEIGHT)
