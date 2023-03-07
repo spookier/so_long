@@ -62,5 +62,5 @@ int redraw(t_all *data)
     fill_wall(data);
     fill_collectible(data);
     
-    
+    return(0);
 }

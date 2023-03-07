@@ -2,12 +2,16 @@
 # Variables
 NAME = so_long
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 # path for srcs
 SRCS_DIR = ./srcs/
 SRCS_UTILS_DIR = ./srcs/utils/
 
+#path for LIBFT
+LIBFT_DIR = ./libft
+LIBFT_NAME = libft.a
+LIBFT = $(addprefix $(LIBFT_DIR)/, $(LIBFT_NAME))
 
 # path for header
 INCS_DIR = ./incs
@@ -35,10 +39,13 @@ OBJ_FILES = $(FILES:.c=.o)
 	$(CC) $(CFLAGS) -c -o $@ $< -I $(INCS_DIR)
 
 
-all : $(NAME)
+all : $(LIBFT_NAME) $(NAME)
+
+$(LIBFT_NAME):
+	make -C $(LIBFT_DIR)
 
 
-$(NAME) : $(MLX) $(OBJ_FILES)
+$(NAME) : $(MLX) $(OBJ_FILES) $(LIBFT)
 	$(CC) $(CFLAGS) $^ -o $@ -I$(INCS_DIR) -L$(MLX_DIR) -lmlx $(MLX_FLAGS)
 
 
@@ -48,11 +55,13 @@ $(MLX):
 
 # Clean all object files created
 clean : 
+	make clean -C $(LIBFT_DIR)
 	rm -rf $(OBJ_FILES)
 	make clean -C $(MLX_DIR)
 
 # Clean all object files + the library created
 fclean : clean
+	make fclean -C $(LIBFT_DIR)
 	rm -rf $(NAME)
 
 

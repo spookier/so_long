@@ -32,14 +32,6 @@ int fill_collectible(t_all *all)
     return(0);
 }
 
-
-int check_collectible(t_all *all)
-{
-    if(map[all->player_pos.y / 32][all->player_pos.x / 32] == 4)
-        eat_collectible(all);
-
-}
-
 int eat_collectible(t_all *all)
 {
     map[all->player_pos.y / 32][all->player_pos.x / 32] = 0;
@@ -50,5 +42,16 @@ int eat_collectible(t_all *all)
     all->collectible_counter--;
 
     printf("collectibles remaining: %d\n", all->collectible_counter);
-
+    return(0);
 }
+
+
+int check_collectible(t_all *all)
+{
+    if(map[all->player_pos.y / 32][all->player_pos.x / 32] == 4)
+        eat_collectible(all);
+
+    return(0);
+}
+
+
