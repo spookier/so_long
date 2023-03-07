@@ -81,14 +81,15 @@ int main(int argc, char **argv)
 	int fd;
 	char *line;
 
-	if(argc != 2)
-		return(1);
+	// if(argc != 2)
+	// 	return(1);
 
 	line = NULL;
 	fd = open("test.txt", O_RDONLY);
 
-	check_arg(argv[1]);
-	check_line(fd, line);
+	//check_arg(argv[1]);
+	//check_line(fd, line);
+	ft_printf("alex\n");
 
 	
 	close(fd);

@@ -2,7 +2,6 @@
 
 int fill_background(t_all *all)
 {
-    int zero;
     int one;
     int two;
     int i;
@@ -10,7 +9,6 @@ int fill_background(t_all *all)
 
     one = 0;
     two = 0;
-    zero = 0;
  
     i = 0;
     while(two < MAP_HEIGHT)

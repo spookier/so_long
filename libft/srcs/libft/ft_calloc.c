@@ -9,8 +9,8 @@
 /*   Updated: 2022/12/15 17:47:09 by acostin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../../incs/libft.h"
 
+#include "libft.h"
 
 void	*ft_calloc(size_t num, size_t size)
 {
