@@ -23,7 +23,7 @@ int check_rectangle(int fd, char *line, int count, int length)
 	{
 		if (length != count_chars(line))
 		{
-			printf("Error\n");
+			ft_printf("Error\nMap is not a rectangle\n");
 			free(line);
 			close(fd);
 			return (1);
@@ -33,33 +33,52 @@ int check_rectangle(int fd, char *line, int count, int length)
 }
 
 
-void check_line(int fd, char *line)
+int check_walls(char *line, int count, int length)
 {
-	int length;
-	int count;
-
-	length = 0;
-	count = 0;
-	while (1)
+	if (count == 1 || count == length)
 	{
-		line = get_next_line(fd);
-		if (line == NULL)
-			break ;
-		if (*line == '\n' || *line == '#')
+		int i = 0;
+		while (line[i])
 		{
-			free(line);
-			continue ;
+			if (line[i] != '1')
+			{
+				ft_printf("Error\nInvalid map\n");
+				free(line);
+				return (1);
+			}
+			i++;
 		}
-		if (line[ft_strlen(line) - 1] == '\n')
-			line[ft_strlen(line) - 1] = '\0';
-		count++;
-		length = check_rectangle(fd, line, count, length);
-		printf("line = %s\n", line);
 	}
-		printf("end of check line\n");
 
+	return (0);
 }
 
+void check_line(int fd, char *line)
+{
+    int length;
+    int count;
+
+    length = 0;
+    count = 0;
+    while (1)
+    {
+        line = get_next_line(fd);
+        if (line == NULL)
+            break ;
+        if (*line == '\n' || *line == '#')
+        {
+            free(line);
+            continue ;
+        }
+        if (line[ft_strlen(line) - 1] == '\n')
+            line[ft_strlen(line) - 1] = '\0';
+        count++;
+        length = check_rectangle(fd, line, count, length);
+        check_walls(line, count, length);
+    printf("last line = %s\n", line);
+
+    }
+}
 
 int check_arg(char *argv)
 {
@@ -68,15 +87,14 @@ int check_arg(char *argv)
 	len = ft_strlen(argv);
 	if (len <= 4)
 	{
-		ft_printf("File extension error. Not a .ber type\n");
+		ft_printf("Error\nNot a .ber type\n");
 		return (1);
 	}
 	if (ft_strcmp(argv + len - 4, ".ber") != 0)
 	{
-    	ft_printf("File extension error. Not a .ber type\n");
+    	ft_printf("Error\nNot a .ber type\n");
     	return 1;
 	}
-	printf("end of check arg\n");
 	return(0);
 }
 
@@ -90,13 +108,13 @@ int main(int argc, char **argv)
 		return(1);
 
 	line = NULL;
-	fd = open("test.txt", O_RDONLY);
+	fd = open(argv[1], O_RDONLY);
 
 	check_arg(argv[1]);
 
 	check_line(fd, line);
 
-	ft_printf("end of gnl\n");
+	ft_printf("-----------end of gnl-----------\n");
 
 	
 	close(fd);
