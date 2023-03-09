@@ -108,6 +108,7 @@ void check_line(int fd, char *line)
 		check_borders(fd, line, length);
 		last_line = ft_strdup(line);
 		free(line);
+		free(last_line);
 	}
 	check_walls(fd, last_line, -1);
 }
@@ -146,7 +147,6 @@ int main(int argc, char **argv)
 
 	check_line(fd, line);
 
-	// ft_printf("-----------end of gnl-----------\n");
 
 	close(fd);
 	return (0);
