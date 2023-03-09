@@ -15,7 +15,24 @@ int count_chars(char *line)
 }
 
 
-int check_rectangle(char *line, int count, int length)
+// int check_rectangle(int fd, char *line, int count, int length)
+// {
+// 	if (count == 1)
+// 		length = count_chars(line);
+// 	else
+// 	{
+// 		if (length != count_chars(line))
+// 		{
+// 			ft_printf("Error\nMap is not a rectangle\n");
+// 			free(line);
+// 			//close(fd);
+// 			exit(1);
+// 		}
+// 	}
+// 	return(length);
+// }
+
+int check_rectangle(int fd, char *line, int count, int length)
 {
 	if (count == 1)
 		length = count_chars(line);
@@ -25,15 +42,22 @@ int check_rectangle(char *line, int count, int length)
 		{
 			ft_printf("Error\nMap is not a rectangle\n");
 			free(line);
+			while (1)
+			{
+				line = get_next_line(fd);
+				if (line == NULL)
+					break;
+				free(line);
+			}
+			close(fd);
+			printf("exit\n");
 			exit(1);
 		}
 	}
-	return(length);
+	return (length);
 }
 
-
-
-int check_walls(char *line, int count)
+int check_walls(int fd, char *line, int count)
 {
 	if (count == 1)
 	{
@@ -44,6 +68,7 @@ int check_walls(char *line, int count)
 			{
 				ft_printf("Error\nInvalid map\n");
 				free(line);
+				//close(fd);
 				exit(1);
 			}
 			i++;
@@ -54,7 +79,7 @@ int check_walls(char *line, int count)
 }
 
 
-int check_borders(char *line, int length)
+int check_borders(int fd, char *line, int length)
 {
 	if(line[0] == '1' && line[length - 1] == '1')
 		return(0);
@@ -62,6 +87,7 @@ int check_borders(char *line, int length)
 	{
 			ft_printf("Error\nInvalid map borders\n");
 			free(line);
+			close(fd);
 			exit(1);
 	}
 }
@@ -75,6 +101,7 @@ void check_line(int fd, char *line)
 
     length = 0;
     count = 0;
+	
     while (1)
     {
         line = get_next_line(fd);
@@ -88,13 +115,14 @@ void check_line(int fd, char *line)
         if (line[ft_strlen(line) - 1] == '\n')
             line[ft_strlen(line) - 1] = '\0';
         count++;
-        length = check_rectangle(line, count, length);
-        check_walls(line, count);
-		check_borders(line, length);
+        length = check_rectangle(fd, line, count, length);
+        check_walls(fd, line, count);
+		check_borders(fd, line, length);
 		last_line = line;
+		free(line);
     }
 	count = 1;
-    check_walls(last_line, count);
+    //check_walls(fd, last_line, count);
 }
 
 int check_arg(char *argv)
@@ -105,12 +133,13 @@ int check_arg(char *argv)
 	if (len <= 4)
 	{
 		ft_printf("Error\nNot a .ber type\n");
+
 		return (1);
 	}
 	if (ft_strcmp(argv + len - 4, ".ber") != 0)
 	{
     	ft_printf("Error\nNot a .ber type\n");
-    	return 1;
+    	return (1);
 	}
 	return(0);
 }
@@ -120,6 +149,7 @@ int main(int argc, char **argv)
 {
 	int fd;
 	char *line;
+
 
 	if(argc != 2)
 		return(1);
@@ -131,7 +161,7 @@ int main(int argc, char **argv)
 
 	check_line(fd, line);
 
-	ft_printf("-----------end of gnl-----------\n");
+	//ft_printf("-----------end of gnl-----------\n");
 
 	
 	close(fd);
