@@ -68,7 +68,15 @@ int check_walls(int fd, char *line, int count)
 			{
 				ft_printf("Error\nInvalid map\n");
 				free(line);
-				//close(fd);
+				while (1)
+				{
+					line = get_next_line(fd);
+					if (line == NULL)
+						break;
+					free(line);
+				}
+				close(fd);
+				printf("exit\n");
 				exit(1);
 			}
 			i++;
@@ -87,7 +95,15 @@ int check_borders(int fd, char *line, int length)
 	{
 			ft_printf("Error\nInvalid map borders\n");
 			free(line);
+			while (1)
+			{
+				line = get_next_line(fd);
+				if (line == NULL)
+					break;
+				free(line);
+			}
 			close(fd);
+			printf("exit\n");
 			exit(1);
 	}
 }
