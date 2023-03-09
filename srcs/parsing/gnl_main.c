@@ -15,7 +15,7 @@ int count_chars(char *line)
 }
 
 
-int check_rectangle(int fd, char *line, int count, int length)
+int check_rectangle(char *line, int count, int length)
 {
 	if (count == 1)
 		length = count_chars(line);
@@ -25,17 +25,17 @@ int check_rectangle(int fd, char *line, int count, int length)
 		{
 			ft_printf("Error\nMap is not a rectangle\n");
 			free(line);
-			close(fd);
-			return (1);
+			exit(1);
 		}
 	}
 	return(length);
 }
 
 
-int check_walls(char *line, int count, int length)
+
+int check_walls(char *line, int count)
 {
-	if (count == 1 || count == length)
+	if (count == 1)
 	{
 		int i = 0;
 		while (line[i])
@@ -44,7 +44,7 @@ int check_walls(char *line, int count, int length)
 			{
 				ft_printf("Error\nInvalid map\n");
 				free(line);
-				return (1);
+				exit(1);
 			}
 			i++;
 		}
@@ -53,10 +53,25 @@ int check_walls(char *line, int count, int length)
 	return (0);
 }
 
+
+int check_borders(char *line, int length)
+{
+	if(line[0] == '1' && line[length - 1] == '1')
+		return(0);
+	else
+	{
+			ft_printf("Error\nInvalid map borders\n");
+			free(line);
+			exit(1);
+	}
+}
+
+
 void check_line(int fd, char *line)
 {
     int length;
     int count;
+	char *last_line;
 
     length = 0;
     count = 0;
@@ -73,11 +88,13 @@ void check_line(int fd, char *line)
         if (line[ft_strlen(line) - 1] == '\n')
             line[ft_strlen(line) - 1] = '\0';
         count++;
-        length = check_rectangle(fd, line, count, length);
-        check_walls(line, count, length);
-    printf("last line = %s\n", line);
-
+        length = check_rectangle(line, count, length);
+        check_walls(line, count);
+		check_borders(line, length);
+		last_line = line;
     }
+	count = 1;
+    check_walls(last_line, count);
 }
 
 int check_arg(char *argv)
