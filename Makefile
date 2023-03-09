@@ -26,6 +26,7 @@ MLX = $(addprefix $(MLX_DIR)/, libmlx.a)
 FILES =		$(SRCS_DIR)exec/wall.c \
 			$(SRCS_DIR)exec/render.c \
 			$(SRCS_DIR)exec/player.c \
+			$(SRCS_DIR)exec/player_move.c \
 			$(SRCS_DIR)exec/background.c \
 			$(SRCS_DIR)exec/exit.c \
 			$(SRCS_DIR)exec/collectible.c \

@@ -83,12 +83,20 @@ int		redraw(t_all *data);
 int 	spawn_player(t_all *all);
 int		update_player(t_all *data);
 
+int	move_player_up(t_all *all);
+int	move_player_down(t_all *all);
+int	move_player_left(t_all *all);
+int	move_player_right(t_all *all);
+
 int 	fill_wall(t_all *all);
 int 	fill_background(t_all *all);
 int 	fill_exit(t_all *all);
 int 	fill_collectible(t_all *all);
 
 int 	check_collectible(t_all *all);
+
+
+//PARSING FUNCTIONS
 
 
 #endif

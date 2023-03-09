@@ -1,4 +1,12 @@
+
 #include "../../incs/so_long.h"
+
+typedef struct s_gnl_vars
+{
+	int count;
+	int length;
+
+} t_gnl_vars;
 
 int count_chars(char *line)
 {
@@ -9,13 +17,14 @@ int count_chars(char *line)
 	return (chars);
 }
 
-int check_rectangle(int fd, char *line, int count, int length)
+int check_rectangle(int fd, char *line, t_gnl_vars *vars)
 {
-	if (count == 1)
-		length = count_chars(line);
+	printf("%s nb=%d length=%d\n", line, vars->count, vars->length);
+	if (vars->count == 1)
+		vars->length = count_chars(line);
 	else
 	{
-		if (length != count_chars(line))
+		if (vars->length != count_chars(line))
 		{
 			ft_printf("Error\nMap is not a rectangle\n");
 			free(line);
@@ -27,16 +36,15 @@ int check_rectangle(int fd, char *line, int count, int length)
 				free(line);
 			}
 			close(fd);
-			printf("exit\n");
 			exit(1);
 		}
 	}
-	return (length);
+	return (vars->length);
 }
 
-int check_walls(int fd, char *line, int count)
+int check_walls(int fd, char *line, t_gnl_vars *vars)
 {
-	if (count == 1 || count == -1)
+	if (vars->count == 1)
 	{
 		int i = 0;
 		while (line[i])
@@ -61,9 +69,9 @@ int check_walls(int fd, char *line, int count)
 	return (0);
 }
 
-int check_borders(int fd, char *line, int length)
+int check_borders(int fd, char *line, t_gnl_vars *vars)
 {
-	if (line[0] == '1' && line[length - 1] == '1')
+	if (line[0] == '1' && line[vars->length - 1] == '1')
 		return (0);
 	else
 	{
@@ -81,15 +89,16 @@ int check_borders(int fd, char *line, int length)
 	}
 }
 
-void check_line(int fd, char *line)
+void check_line2(int fd, char *line, t_gnl_vars *vars)
 {
-	int length;
-	int count;
-	char *last_line;
+		vars->length = check_rectangle(fd, line, vars);
+		check_walls(fd, line, vars);
+		check_borders(fd, line, vars);
+		free(line);
+}
 
-	length = 0;
-	count = 0;
-
+void check_line(int fd, char *line, t_gnl_vars *vars)
+{
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -102,16 +111,12 @@ void check_line(int fd, char *line)
 		}
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
-		count++;
-		length = check_rectangle(fd, line, count, length);
-		check_walls(fd, line, count);
-		check_borders(fd, line, length);
-		last_line = ft_strdup(line);
-		free(line);
-		free(last_line);
+		vars->count += 1;
+		check_line2(fd, line, vars);
 	}
-	check_walls(fd, last_line, -1);
+	printf("count=%d length=%d\n", vars->count, vars->length);
 }
+
 
 int check_arg(char *argv)
 {
@@ -136,17 +141,19 @@ int main(int argc, char **argv)
 {
 	int fd;
 	char *line;
+	t_gnl_vars vars;
+	//char **map;
 
 	if (argc != 2)
 		return (1);
-
+	vars.length = 0;
+	vars.count = 0;
 	line = NULL;
 	fd = open(argv[1], O_RDONLY);
 
-	check_arg(argv[1]);
+	//check_arg(argv[1]);
 
-	check_line(fd, line);
-
+	check_line(fd, line, &vars);
 
 	close(fd);
 	return (0);
