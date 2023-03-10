@@ -5,6 +5,7 @@ typedef struct s_gnl_vars
 {
 	int count;
 	int length;
+	char	**map;
 
 } t_gnl_vars;
 
@@ -19,7 +20,6 @@ int count_chars(char *line)
 
 int check_rectangle(int fd, char *line, t_gnl_vars *vars)
 {
-	//printf("%s nb=%d length=%d\n", line, vars->count, vars->length);
 	if (vars->count == 1)
 		vars->length = count_chars(line);
 	else
@@ -89,20 +89,29 @@ int check_borders(int fd, char *line, t_gnl_vars *vars)
 	}
 }
 
-void check_functions(int fd, char *line, t_gnl_vars *vars, char *prev_line)
+
+void check_functions(int fd, char *line, t_gnl_vars *vars)
 {
 	vars->length = check_rectangle(fd, line, vars);
 	check_walls(fd, line, vars);
 	check_borders(fd, line, vars);
-	//free(prev_line);
 	free(line);
+}
+
+
+int	alloc_map(int fd, char *line, t_gnl_vars *v)
+{
+	int i;
+
+	i = 0;
+	v->map = NULL;
+	v->map = (char **)malloc(sizeof(char*) * v->count);
+	if(v->map == NULL)
+		return(1);
 }
 
 void check_line(int fd, char *line, t_gnl_vars *vars)
 {
-	//char *prev_line;
-
-	//prev_line = NULL;
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -116,9 +125,9 @@ void check_line(int fd, char *line, t_gnl_vars *vars)
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
 		vars->count += 1;
-		//prev_line = ft_strdup(line);
-		check_functions(fd, line, vars, prev_line);
+		check_functions(fd, line, vars);
 	}
+	alloc_map(fd, line, vars);
 }
 
 int check_arg(char *argv)
