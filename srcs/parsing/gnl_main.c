@@ -19,7 +19,7 @@ int count_chars(char *line)
 
 int check_rectangle(int fd, char *line, t_gnl_vars *vars)
 {
-	printf("%s nb=%d length=%d\n", line, vars->count, vars->length);
+	//printf("%s nb=%d length=%d\n", line, vars->count, vars->length);
 	if (vars->count == 1)
 		vars->length = count_chars(line);
 	else
@@ -89,16 +89,20 @@ int check_borders(int fd, char *line, t_gnl_vars *vars)
 	}
 }
 
-void check_line2(int fd, char *line, t_gnl_vars *vars)
+void check_functions(int fd, char *line, t_gnl_vars *vars, char *prev_line)
 {
-		vars->length = check_rectangle(fd, line, vars);
-		check_walls(fd, line, vars);
-		check_borders(fd, line, vars);
-		free(line);
+	vars->length = check_rectangle(fd, line, vars);
+	check_walls(fd, line, vars);
+	check_borders(fd, line, vars);
+	//free(prev_line);
+	free(line);
 }
 
 void check_line(int fd, char *line, t_gnl_vars *vars)
 {
+	//char *prev_line;
+
+	//prev_line = NULL;
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -112,11 +116,10 @@ void check_line(int fd, char *line, t_gnl_vars *vars)
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
 		vars->count += 1;
-		check_line2(fd, line, vars);
+		//prev_line = ft_strdup(line);
+		check_functions(fd, line, vars, prev_line);
 	}
-	printf("count=%d length=%d\n", vars->count, vars->length);
 }
-
 
 int check_arg(char *argv)
 {
@@ -151,7 +154,7 @@ int main(int argc, char **argv)
 	line = NULL;
 	fd = open(argv[1], O_RDONLY);
 
-	//check_arg(argv[1]);
+	check_arg(argv[1]);
 
 	check_line(fd, line, &vars);
 
