@@ -6,7 +6,7 @@
 /*   By: acostin <acostin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 13:36:47 by acostin           #+#    #+#             */
-/*   Updated: 2023/01/11 14:15:48 by acostin          ###   ########.fr       */
+/*   Updated: 2023/03/11 06:14:49 by acostin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char	*storage;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (BUFFER_SIZE <= 0)
 		return (0);
+	if (fd < 0)
+		return (free(storage), storage = NULL, NULL);
 	storage = read_line(fd, storage);
 	if (!storage)
 		return (NULL);
