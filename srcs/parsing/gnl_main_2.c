@@ -13,7 +13,6 @@ void showmap(t_pvars *v)
 	}
 }
 
-
 int count_chars(char *line)
 {
 	int chars;
@@ -22,7 +21,6 @@ int count_chars(char *line)
 	chars = ft_strlen(line);
 	return (chars);
 }
-
 
 
 int fill_map(int fd, t_pvars *v)
@@ -110,6 +108,7 @@ void calculate_map_size(char *line, int fd, t_pvars *v)
 			line[ft_strlen(line) - 1] = '\0';
 		v->rows_map += 1;
 		v->chars_map = count_chars(line);
+		printf("line = %s\n", line);
 		free(line);
 	}
 	printf("size is rows:%d | chars:%d\n", v->rows_map, v->chars_map);
@@ -145,14 +144,16 @@ int parsing_exec(char *argv, t_pvars *v)
 	fd = open(argv, O_RDONLY);
 	if(fd < 0)
 		return(1);
+		
 	//--exec
 	calculate_map_size(line, fd, v);
 	if(alloc_map(v) == 1)
 		return(1);
+	free_map(v);
 
 	fill_map(fd, v);
 	//showmap(v);
-	
+
 	//--cleanup	
 	free_map(v);
 	close(fd);
