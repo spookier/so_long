@@ -18,6 +18,7 @@ int calculate_map_size(char *argv, char *line, int fd, t_pvars *v)
 		v->chars_map = count_chars(line);
 		free(line);
 	}
+	get_next_line(-1);
 	close(fd);
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
@@ -81,7 +82,6 @@ int main(int argc, char **argv)
 		printf("Error\nexec fail\n");
 		return (1);
 	}
-
 	printf("--------------end of parsing--------------\n");
 	return (0);
 }

@@ -41,8 +41,8 @@ int fill_map(char *line, int fd, t_pvars *v)
 			line[ft_strlen(line) - 1] = '\0';
 		v->map[i] = line;
 		i++;
-		// free(line);
 	}
+	get_next_line(-1);
 	printf("map fill'd\n");
 	return (0);
 }
@@ -80,7 +80,16 @@ int alloc_map(t_pvars *v)
 	{
 		v->map[i] = (char *)malloc(sizeof(char) * (v->chars_map + 1));
 		if (v->map[i] == NULL)
+		{
+			// free
+			while (i)
+			{
+				free(v->map[i - 1]);
+				i--;
+			}
+			free(v->map);
 			return (1);
+		}
 		i++;
 	}
 	printf("map alloc'd\n");
