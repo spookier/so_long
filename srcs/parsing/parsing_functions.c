@@ -39,7 +39,9 @@ int fill_map(char *line, int fd, t_pvars *v)
 		}
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
-		v->map[i] = line;
+
+		ft_strlcpy(v->map[i], line, v->chars_map);
+		free(line);
 		i++;
 	}
 	get_next_line(-1);
