@@ -7,10 +7,8 @@ typedef struct s_pvars
 {
 	int		rows_map;
 	int 	chars_map;
-	int		**map;
+	char		**map;
 
 } t_pvars;
-
-
 
 #endif
