@@ -1,12 +1,11 @@
 #include "gnl_so_long.h"
 
-
 void showmap(t_pvars *v)
 {
 	int i;
 
 	i = 0;
-	while(i < v->rows_map)
+	while (i < v->rows_map)
 	{
 		printf("[%d] = %s\n", i, v->map[i]);
 		i++;
@@ -22,16 +21,12 @@ int count_chars(char *line)
 	return (chars);
 }
 
-
-int fill_map(int fd, t_pvars *v)
+int fill_map(char *line, int fd, t_pvars *v)
 {
 	int i;
-	char *line;
 	i = 0;
-	line = NULL;
-	while(i < v->rows_map)
+	while (i < v->rows_map)
 	{
-		printf("entered loop !!\n");
 		line = get_next_line(fd);
 		if (line == NULL)
 			break;
@@ -44,32 +39,29 @@ int fill_map(int fd, t_pvars *v)
 			line[ft_strlen(line) - 1] = '\0';
 		v->map[i] = line;
 		i++;
-		free(line);
+		// free(line);
 	}
 	printf("map filled\n");
-	return(0);
+	return (0);
 }
-
-
 
 void free_map(t_pvars *v)
 {
 	int i;
 
-    if (v->map != NULL) 
+	if (v->map != NULL)
 	{
 		i = 0;
-        while (i < v->rows_map) 
+		while (i < v->rows_map)
 		{
-            free(v->map[i]);
-            i++;
-        }
-        free(v->map);
-        v->map = NULL;
-    }
+			free(v->map[i]);
+			i++;
+		}
+		free(v->map);
+		v->map = NULL;
+	}
 	printf("map freed\n");
 }
-
 
 int alloc_map(t_pvars *v)
 {
@@ -78,21 +70,20 @@ int alloc_map(t_pvars *v)
 	i = 0;
 	v->map = NULL;
 	v->map = (char **)malloc(v->rows_map * sizeof(char *));
-	if(v->map == NULL)
-		return(1);
-	while(i < v->rows_map)
+	if (v->map == NULL)
+		return (1);
+	while (i < v->rows_map)
 	{
-		v->map[i] = (char*)malloc(sizeof(char) * (v->chars_map + 1));
-		if(v->map[i] == NULL)
-			return(1);
+		v->map[i] = (char *)malloc(sizeof(char) * (v->chars_map + 1));
+		if (v->map[i] == NULL)
+			return (1);
 		i++;
 	}
 	printf("map alloc'd\n");
-	return(0);
+	return (0);
 }
 
-
-void calculate_map_size(char *line, int fd, t_pvars *v)
+int calculate_map_size(char *argv, char *line, int fd, t_pvars *v)
 {
 	while (1)
 	{
@@ -108,12 +99,15 @@ void calculate_map_size(char *line, int fd, t_pvars *v)
 			line[ft_strlen(line) - 1] = '\0';
 		v->rows_map += 1;
 		v->chars_map = count_chars(line);
-		printf("line = %s\n", line);
 		free(line);
 	}
+	close(fd);
+	fd = open(argv, O_RDONLY);
+	if (fd < 0)
+		return (1);
+	return (0);
 	printf("size is rows:%d | chars:%d\n", v->rows_map, v->chars_map);
 }
-
 
 int check_arg(char *argv)
 {
@@ -132,7 +126,6 @@ int check_arg(char *argv)
 	return (0);
 }
 
-
 int parsing_exec(char *argv, t_pvars *v)
 {
 	int fd;
@@ -142,38 +135,37 @@ int parsing_exec(char *argv, t_pvars *v)
 	v->chars_map = 0;
 	line = NULL;
 	fd = open(argv, O_RDONLY);
-	if(fd < 0)
-		return(1);
-		
+	if (fd < 0)
+		return (1);
+
 	//--exec
-	calculate_map_size(line, fd, v);
-	if(alloc_map(v) == 1)
-		return(1);
-	free_map(v);
 
-	fill_map(fd, v);
-	//showmap(v);
+	if (calculate_map_size(argv, line, fd, v) == 1 || alloc_map(v) == 1)
+		return (1);
 
-	//--cleanup	
+	fill_map(line, fd, v);
+	// showmap(v);
+
+	//--cleanup
 	free_map(v);
 	close(fd);
-	return(0);
+	return (0);
 }
-
 
 int main(int argc, char **argv)
 {
 
 	t_pvars vars;
-	
+
 	if (argc != 2)
 		return (1);
 	check_arg(argv[1]);
-	parsing_exec(argv[1], &vars);
-
-
+	if (parsing_exec(argv[1], &vars) == 1)
+	{
+		printf("Error\nexec fail\n");
+		return (1);
+	}
 
 	printf("--------------end of parsing--------------\n");
 	return (0);
 }
-
