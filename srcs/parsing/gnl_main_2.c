@@ -7,7 +7,7 @@ void showmap(t_pvars *v)
 	i = 0;
 	while (i < v->rows_map)
 	{
-		printf("[%d] = %s\n", i, v->map[i]);
+		printf("map[%d] = %s\n", i, v->map[i]);
 		i++;
 	}
 }
@@ -144,7 +144,7 @@ int parsing_exec(char *argv, t_pvars *v)
 		return (1);
 
 	fill_map(line, fd, v);
-	// showmap(v);
+	showmap(v);
 
 	//--cleanup
 	free_map(v);
