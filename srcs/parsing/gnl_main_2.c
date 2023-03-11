@@ -10,6 +10,38 @@ int count_chars(char *line)
 }
 
 
+int fill_map(t_pvars *v)
+{
+	int i;
+
+	i = 0;
+	while(1)
+	{
+
+	}
+}
+
+
+void free_map(t_pvars *v)
+{
+	int i;
+
+    if (v->map != NULL) 
+	{
+		i = 0;
+        while (i < v->rows_map) 
+		{
+            free(v->map[i]);
+            i++;
+        }
+        free(v->map);
+        v->map = NULL;
+    }
+	printf("map freed\n");
+}
+
+
+
 int alloc_map(t_pvars *v)
 {
 	int i;
@@ -19,10 +51,15 @@ int alloc_map(t_pvars *v)
 	v->map = (int **)malloc(v->rows_map * sizeof(int *));
 	if(v->map == NULL)
 		return(1);
-	while(i <= v->rows_map)
+	while(i < v->rows_map)
 	{
-		v->map[i] = (int*)malloc(sizeof(int*));
+		v->map[i] = (int*)malloc(sizeof(int*) * v->chars_map);
+		if(v->map[i] == NULL)
+			return(1);
+		i++;
 	}
+	printf("map alloc'd\n");
+	return(0);
 }
 
 void calculate_map_size(char *line, int fd, t_pvars *v)
@@ -65,27 +102,42 @@ int check_arg(char *argv)
 }
 
 
-int main(int argc, char **argv)
+int parsing_exec(char **argv, t_pvars *v)
 {
 	int fd;
 	char *line;
+
+	v->rows_map = 0;
+	v->chars_map = 0;
+	line = NULL;
+	fd = open(argv[1], O_RDONLY);
+	if(fd < 0)
+		return(1);
+
+	//exec
+	calculate_map_size(line, fd, v);
+	if(alloc_map(v) == 1)
+		return(1);
+	
+	//cleanup	
+	free_map(v);
+	close(fd);
+	return(0);
+}
+
+int main(int argc, char **argv)
+{
+
 	t_pvars vars;
 
 	if (argc != 2)
 		return (1);
-
-	vars.rows_map = 0;
-	vars.chars_map = 0;
-	line = NULL;
-	fd = open(argv[1], O_RDONLY);
 	check_arg(argv[1]);
+	parsing_exec(argv, &vars);
 
-	calculate_map_size(line, fd, &vars);
-	
+
+
 	printf("--------------end of parsing--------------\n");
-
-	//check_line(fd, line, &vars);
-	close(fd);
 	return (0);
 }
 
