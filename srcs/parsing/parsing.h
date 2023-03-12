@@ -13,8 +13,11 @@ typedef struct s_pvars
 
 void showmap(t_pvars *v);
 int count_chars(char *line);
-int fill_map(char *line, int fd, t_pvars *v);
 void free_map(t_pvars *v);
 int alloc_map(t_pvars *v);
+int fill_map(char *line, int fd, t_pvars *v);
 
+
+int init_check_map(t_pvars *v);
+int check_rectangle(t_pvars *v);
 #endif
