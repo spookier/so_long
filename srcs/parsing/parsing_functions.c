@@ -13,6 +13,7 @@ void showmap(t_pvars *v)
 	}
 }
 
+
 int count_chars(char *line)
 {
 	int chars;
@@ -39,8 +40,7 @@ int fill_map(char *line, int fd, t_pvars *v)
 		}
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
-
-		ft_strlcpy(v->map[i], line, v->chars_map);
+		ft_strcpy(v->map[i], line);
 		free(line);
 		i++;
 	}
@@ -83,13 +83,13 @@ int alloc_map(t_pvars *v)
 		v->map[i] = (char *)malloc(sizeof(char) * (v->chars_map + 1));
 		if (v->map[i] == NULL)
 		{
-			// free
 			while (i)
 			{
 				free(v->map[i - 1]);
 				i--;
 			}
 			free(v->map);
+			ft_printf("Error\nMap failled to allocate\n");
 			return (1);
 		}
 		i++;

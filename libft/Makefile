@@ -6,7 +6,7 @@
 #    By: acostin <acostin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/09 14:13:22 by acostin           #+#    #+#              #
-#    Updated: 2022/12/15 18:02:38 by acostin          ###   ########.fr        #
+#    Updated: 2023/03/12 12:06:18 by acostin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ LIBFT = ft_atoi \
 		ft_lstmap \
 	  	ft_lstnew \
 		ft_lstsize \
+		ft_strcpy \
 
 GNL = get_next_line \
       		get_next_line_utils \

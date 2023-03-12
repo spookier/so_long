@@ -24,7 +24,6 @@ int calculate_map_size(char *argv, char *line, int fd, t_pvars *v)
 	if (fd < 0)
 		return (1);
 	return (0);
-	printf("size is rows:%d | chars:%d\n", v->rows_map, v->chars_map);
 }
 
 int check_arg(char *argv)
@@ -44,6 +43,8 @@ int check_arg(char *argv)
 	return (0);
 }
 
+
+
 int parsing_exec(char *argv, t_pvars *v)
 {
 	int fd;
@@ -57,13 +58,18 @@ int parsing_exec(char *argv, t_pvars *v)
 		return (1);
 
 	//--exec
-
 	if (calculate_map_size(argv, line, fd, v) == 1 || alloc_map(v) == 1)
 		return (1);
-
 	fill_map(line, fd, v);
-	showmap(v);
+	
+	if(init_check_map(v) == 1)
+	{
+		free_map(v);
+		return(1);
+	}
+	
 
+	showmap(v);
 	//--cleanup
 	free_map(v);
 	close(fd);
@@ -79,7 +85,7 @@ int main(int argc, char **argv)
 	check_arg(argv[1]);
 	if (parsing_exec(argv[1], &vars) == 1)
 	{
-		printf("Error\nexec fail\n");
+		printf("Error\nParsing failed\n");
 		return (1);
 	}
 	printf("--------------end of parsing--------------\n");
