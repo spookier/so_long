@@ -1,37 +1,42 @@
 #include "parsing.h"
 
-// static void check_map_validity(t_pvars *v, t_items *item)
-// {
-//     int i;
+static void check_map_validity(t_pall *all)
+{
+    int i;
 	
-// 	i = 0;
-//     while (i < v->rows_map) 
-// 	{
-//         int j = 0;
-//         while (j < v->chars_map) 
-// 		{
-//             if (v->map[i][j] == 'E') 
-// 				item->exit++;
-//             else if (v->map[i][j] == 'C') 
-//                 item->collectibles++;
-//             else if (v->map[i][j] == 'P') 
-// 				item->start;
-//             j++;
-//         }
-//         i++;
-//     }
-// }
+	i = 0;
+    while (i < all->vars.rows_map) 
+	{
+        int j = 0;
+        while (j < all->vars.chars_map) 
+		{
+            if (all->vars.map[i][j] == 'E') 
+				all->items.exit++;
+            else if (all->vars.map[i][j] == 'C') 
+               all->items.collectibles++;
+            else if (all->vars.map[i][j] == 'P') 
+				all->items.start++;
+            j++;
+        }
+        i++;
+    }
+}
 
 
-// static int init_items(t_pvars *v, t_items *item)
-// {
-// 	item->start = 0;
-// 	item->exit = 0;
-// 	item->collectibles = 0;
-// 	check_map_validity(v, item);
-// 	if(item->start > 1 || item->exit > 1 || item->collectibles < 1)
-// 		return(1);
-// }
+static int init_items(t_pall *all)
+{
+	all->items.start = 0;
+	all->items.exit = 0;
+	all->items.collectibles = 0;
+
+	check_map_validity(all);
+	if (all->items.start < 1 || all->items.exit < 1 || all->items.collectibles < 1) 
+	{
+		ft_printf("Error\nNot enough map components\n");
+		return(1);
+	}
+	return(0);
+}
 
 
 static int check_rectangle(t_pvars *v)
@@ -62,9 +67,8 @@ int init_check_map(t_pall *all)
 		return(1);
 	}
 
-	if(check_rectangle(&all->vars) == 1)
+	if(check_rectangle(&all->vars) == 1 || init_items(all) == 1)
 		return(1);
-	
 
 	printf("map checked\n");
 	return(0);
