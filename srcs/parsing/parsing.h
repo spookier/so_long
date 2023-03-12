@@ -19,5 +19,4 @@ int fill_map(char *line, int fd, t_pvars *v);
 
 
 int init_check_map(t_pvars *v);
-int check_rectangle(t_pvars *v);
 #endif
