@@ -44,7 +44,6 @@ int check_arg(char *argv)
 }
 
 
-
 int parsing_exec(char *argv, t_pvars *v)
 {
 	int fd;
@@ -70,6 +69,8 @@ int parsing_exec(char *argv, t_pvars *v)
 	
 
 	showmap(v);
+
+
 	//--cleanup
 	free_map(v);
 	close(fd);
@@ -85,7 +86,7 @@ int main(int argc, char **argv)
 	check_arg(argv[1]);
 	if (parsing_exec(argv[1], &vars) == 1)
 	{
-		printf("Error\nParsing failed\n");
+		printf("++Error\n++Parsing failed\n");
 		return (1);
 	}
 	printf("--------------end of parsing--------------\n");
