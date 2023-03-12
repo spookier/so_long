@@ -44,47 +44,47 @@ int check_arg(char *argv)
 }
 
 
-int parsing_exec(char *argv, t_pvars *v)
+int parsing_exec(char *argv, t_pall *all)
 {
 	int fd;
 	char *line;
 
-	v->rows_map = 0;
-	v->chars_map = 0;
+	all->vars.rows_map = 0;
+	all->vars.chars_map = 0;
 	line = NULL;
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
 		return (1);
 
 	//--exec
-	if (calculate_map_size(argv, line, fd, v) == 1 || alloc_map(v) == 1)
+	if (calculate_map_size(argv, line, fd, &all->vars) == 1 || alloc_map(&all->vars) == 1)
 		return (1);
-	fill_map(line, fd, v);
+	fill_map(line, fd, &all->vars);
 	
-	if(init_check_map(v) == 1)
+	if(init_check_map(all) == 1)
 	{
-		free_map(v);
+		free_map(&all->vars);
 		return(1);
 	}
 	
 
-	showmap(v);
+	showmap(&all->vars);
 
 
 	//--cleanup
-	free_map(v);
+	free_map(&all->vars);
 	close(fd);
 	return (0);
 }
 
 int main(int argc, char **argv)
 {
-	t_pvars vars;
+	t_pall all;
 
 	if (argc != 2)
 		return (1);
 	check_arg(argv[1]);
-	if (parsing_exec(argv[1], &vars) == 1)
+	if (parsing_exec(argv[1], &all) == 1)
 	{
 		printf("++Error\n++Parsing failed\n");
 		return (1);
