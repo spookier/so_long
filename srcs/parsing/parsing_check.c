@@ -1,9 +1,11 @@
 #include "parsing.h"
 
-int is_valid_position(t_pall *all, char visited[all->vars.rows_map][all->vars.chars_map], int x, int y) 
+static int is_valid_position(t_pall *all, char visited[all->vars.rows_map][all->vars.chars_map], int x, int y) 
 {
-    if (x >= 0 && x < all->vars.rows_map && y >= 0 && y < all->vars.chars_map && visited[x][y] == '0') 
+    if (x >= 0 && x < all->vars.rows_map && y >= 0 && y < all->vars.chars_map && (visited[x][y] == '0' || visited[x][y] == 'C')) 
 		return (1);
+	if(visited[x][y] == 'E')
+		return(1);
     return (0);
 }
 
@@ -11,13 +13,10 @@ int flood_fill(t_pall *all, char visited[all->vars.rows_map][all->vars.chars_map
 {
     if (visited[x][y] == 'E') 
 	{
-		printf("PATH FOUND BRUH!!!!!!!!!!!!\n");
         return (1);
     }
-    // Mark the current position as visited
     visited[x][y] = 'x';
 
-    // Check if we can move in all directions
     if (is_valid_position(all, visited, x-1, y) && flood_fill(all, visited, x-1, y)) {
         return 1;
     }
@@ -31,13 +30,50 @@ int flood_fill(t_pall *all, char visited[all->vars.rows_map][all->vars.chars_map
         return 1;
     }
 
-		visited[x][y] = 'x';
+    return (0);
+}
 
+static void find_exit(t_pall *all)
+{
+	int i;
+	int j;
 
-	// If we reach the end position, return true
+	i =0;
+	while(i < all->vars.rows_map)
+	{
+		j = 0;
+		while(j < all->vars.chars_map)
+		{
+			if(all->vars.map[i][j] == 'E')
+			{
+				all->items.pos_start_x = i;
+				all->items.pos_start_y = j;
+				printf("%d %d\n\n", i, j);
+			}
+			j++;
+		}
+		i++;
+	}
+	return;
+}
 
+static void copy_map(t_pall *all, char visited[all->vars.rows_map][all->vars.chars_map])
+{
+	int i;
+	int j;
 
-    return 0;
+	i = 0;
+	while(i < all->vars.rows_map)
+	{
+		j = 0;
+		while(j < all->vars.chars_map)
+		{
+			visited[i][j] = all->vars.map[i][j];
+			j++;
+		}
+		i++;
+	}
+	return;
 }
 
 static void check_map_validity(t_pall *all)
@@ -50,7 +86,7 @@ static void check_map_validity(t_pall *all)
         int j = 0;
         while (j < all->vars.chars_map) 
 		{
-            if (all->vars.map[i][j] == 'E') 
+            if (all->vars.map[i][j] == 'E')
 				all->items.exit++;
             else if (all->vars.map[i][j] == 'C') 
                all->items.collectibles++;
@@ -130,8 +166,11 @@ static int check_walls_surround(t_pvars *v)
 	return(0);
 }
 
+
 int init_check_map(t_pall *all)
 {
+	char visited[all->vars.rows_map][all->vars.chars_map];
+
 	if(all->vars.rows_map < 3 || all->vars.chars_map < 2)
 	{
 		all->error = "Error\nInvalid map\n";
@@ -145,47 +184,35 @@ int init_check_map(t_pall *all)
 		all->error = "Error\nMap not surrounded by walls\n";
 		return(1);
 	}
-	
-	char visited[all->vars.rows_map][all->vars.chars_map];
-	int i;
-	int j;
 
-	i = 0;
-	while(i < all->vars.rows_map)
+	copy_map(all, visited);
+	// int i;
+	// int j;
+
+	// i = 0;
+	// while(i < all->vars.rows_map)
+	// {
+	// 	j = 0;
+	// 	while(j < all->vars.chars_map)
+	// 	{
+	// 		visited[i][j] = all->vars.map[i][j];
+	// 		j++;
+	// 	}
+	// 	i++;
+	// }
+	find_exit(all);
+
+	if (flood_fill(all, visited, 5, 5))
 	{
-		j = 0;
-		while(j < all->vars.chars_map)
-		{
-			visited[i][j] = all->vars.map[i][j];
-			j++;
-		}
-		i++;
+		printf("map ok\n");
+        return(0);
 	}
-
-	if (flood_fill(all, visited, 1, 1))
-    {
-        printf("Path found!\n");
-    }
     else
-    {
-        printf("Path not found.\n");
-    }
-
-	i = 0;
-	while(i < all->vars.rows_map)
 	{
-		j = 0;
-		while(j < all->vars.chars_map)
-		{
-			printf("%c", visited[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
+		all->error = "Error\nPath not found\n";
+		return(1);
 	}
-	printf("\n");
 
-	exit(1);
 	printf("map checked\n");
 	return(0);
 }
