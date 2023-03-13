@@ -1,20 +1,19 @@
 #include "parsing.h"
 
-int is_valid_position(t_pall *all, char visited[all->vars.rows_map][all->vars.chars_map], int x, int y) {
+int is_valid_position(t_pall *all, char visited[all->vars.rows_map][all->vars.chars_map], int x, int y) 
+{
     if (x >= 0 && x < all->vars.rows_map && y >= 0 && y < all->vars.chars_map && visited[x][y] == '0') 
-		return 1;
-    return 0;
+		return (1);
+    return (0);
 }
 
 int flood_fill(t_pall *all, char visited[all->vars.rows_map][all->vars.chars_map], int x, int y) 
 {
-	printf("x = %d Y = %d\n", x, y);
-    // If we reach the end position, return true
     if (visited[x][y] == 'E') 
 	{
-        return 3;
+		printf("PATH FOUND BRUH!!!!!!!!!!!!\n");
+        return (1);
     }
-
     // Mark the current position as visited
     visited[x][y] = 'x';
 
@@ -31,6 +30,13 @@ int flood_fill(t_pall *all, char visited[all->vars.rows_map][all->vars.chars_map
     if (is_valid_position(all, visited, x, y+1) && flood_fill(all, visited, x, y+1)) {
         return 1;
     }
+
+		visited[x][y] = 'x';
+
+
+	// If we reach the end position, return true
+
+
     return 0;
 }
 
@@ -156,7 +162,7 @@ int init_check_map(t_pall *all)
 		i++;
 	}
 
-	if (flood_fill(all, visited, 1, 2) == 3)
+	if (flood_fill(all, visited, 1, 1))
     {
         printf("Path found!\n");
     }
@@ -165,7 +171,6 @@ int init_check_map(t_pall *all)
         printf("Path not found.\n");
     }
 
-	printf("\n");
 	i = 0;
 	while(i < all->vars.rows_map)
 	{
