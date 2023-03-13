@@ -1,5 +1,29 @@
 #include "parsing.h"
 
+void flood_fill(t_pall *all) 
+{
+    // Check if current position is out of bounds or has already been visited
+    if (row < 0 || row >= rows || col < 0 || col >= cols || visited[row][col]) {
+        return;
+    }
+
+    // Mark current position as visited
+    visited[row][col] = 1;
+
+    // Check if current position is a valid path
+    if (map[row][col] != '0' && map[row][col] != 'P' && map[row][col] != 'E') {
+        return;
+    }
+
+    // Recursively flood fill adjacent positions
+    flood_fill(map, row - 1, col, visited);  // Up
+    flood_fill(map, row + 1, col, visited);  // Down
+    flood_fill(map, row, col - 1, visited);  // Left
+    flood_fill(map, row, col + 1, visited);  // Right
+}
+
+
+
 static void check_map_validity(t_pall *all)
 {
     int i;
