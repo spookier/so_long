@@ -46,9 +46,8 @@ static void find_exit(t_pall *all)
 		{
 			if(all->vars.map[i][j] == 'E')
 			{
-				all->items.pos_start_x = i;
-				all->items.pos_start_y = j;
-				printf("%d %d\n\n", i, j);
+				all->items.pos_start_x = j;
+				all->items.pos_start_y = i;
 			}
 			j++;
 		}
@@ -106,9 +105,9 @@ static int init_items(t_pall *all)
 	all->items.collectibles = 0;
 
 	check_map_validity(all);
-	if (all->items.start < 1 || all->items.exit < 1 || all->items.collectibles < 1) 
+	if (all->items.start != 1 || all->items.exit != 1 || all->items.collectibles < 1) 
 	{
-		ft_printf("Error\nNot enough map components\n");
+		all->error = "Error\nNot enough map components\n";
 		return(1);
 	}
 	return(0);
@@ -186,23 +185,9 @@ int init_check_map(t_pall *all)
 	}
 
 	copy_map(all, visited);
-	// int i;
-	// int j;
 
-	// i = 0;
-	// while(i < all->vars.rows_map)
-	// {
-	// 	j = 0;
-	// 	while(j < all->vars.chars_map)
-	// 	{
-	// 		visited[i][j] = all->vars.map[i][j];
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
 	find_exit(all);
-
-	if (flood_fill(all, visited, 5, 5))
+	if (flood_fill(all, visited, all->items.pos_start_x, all->items.pos_start_y))
 	{
 		printf("map ok\n");
         return(0);
