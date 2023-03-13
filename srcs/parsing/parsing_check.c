@@ -8,10 +8,11 @@ int is_valid_position(t_pall *all, char visited[all->vars.rows_map][all->vars.ch
 
 int flood_fill(t_pall *all, char visited[all->vars.rows_map][all->vars.chars_map], int x, int y) 
 {
+	printf("x = %d Y = %d\n", x, y);
     // If we reach the end position, return true
     if (visited[x][y] == 'E') 
 	{
-        return 1;
+        return 3;
     }
 
     // Mark the current position as visited
@@ -139,7 +140,7 @@ int init_check_map(t_pall *all)
 		return(1);
 	}
 	
-	char visited[all->vars.rows_map - 1][all->vars.chars_map - 1];
+	char visited[all->vars.rows_map][all->vars.chars_map];
 	int i;
 	int j;
 
@@ -155,7 +156,7 @@ int init_check_map(t_pall *all)
 		i++;
 	}
 
-	if (flood_fill(all, visited, 3, 3))
+	if (flood_fill(all, visited, 1, 2) == 3)
     {
         printf("Path found!\n");
     }
@@ -178,6 +179,7 @@ int init_check_map(t_pall *all)
 		i++;
 	}
 	printf("\n");
+
 	exit(1);
 	printf("map checked\n");
 	return(0);
