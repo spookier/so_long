@@ -23,6 +23,7 @@ typedef struct s_pall
 {
 	t_pvars vars;
 	t_items items;
+	char *error;
 
 }	t_pall;
 

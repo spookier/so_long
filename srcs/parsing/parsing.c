@@ -26,9 +26,12 @@ int calculate_map_size(char *argv, char *line, int fd, t_pvars *v)
 	return (0);
 }
 
-int check_arg(char *argv)
+int check_arg(int argc, char *argv)
 {
 	int len;
+
+		if (argc != 2)
+		return (1);
 	len = ft_strlen(argv);
 	if (len <= 4)
 	{
@@ -80,13 +83,13 @@ int parsing_exec(char *argv, t_pall *all)
 int main(int argc, char **argv)
 {
 	t_pall all;
+	all.error = NULL;
 
-	if (argc != 2)
-		return (1);
-	check_arg(argv[1]);
+	check_arg(argc, argv[1]);
+
 	if (parsing_exec(argv[1], &all) == 1)
 	{
-		printf("++Error\n++Parsing failed\n");
+		ft_printf("%s", all.error);
 		return (1);
 	}
 	printf("--------------end of parsing--------------\n");

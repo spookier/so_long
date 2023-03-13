@@ -39,21 +39,21 @@ static int init_items(t_pall *all)
 }
 
 
-static int check_rectangle(t_pvars *v)
+static int check_rectangle(t_pall *all)
 {
   	int expected_cols;
 	int i;
 
     i = 0;
-	expected_cols = v->chars_map;
-    while (i < v->rows_map) 
+	expected_cols = all->vars.chars_map;
+    while (i < all->vars.rows_map) 
 	{
-        if ((int)ft_strlen(v->map[i]) != expected_cols) 
+        if ((int)ft_strlen(all->vars.map[i]) != expected_cols) 
 		{
-            printf("Error\nMap is not rectangular\n");
+			all->error = "Error\nMap is not rectangular\n";
             return (1);
         }
-        expected_cols = ft_strlen(v->map[i]);
+        expected_cols = ft_strlen(all->vars.map[i]);
         i++;
     }
     return 0;
@@ -61,29 +61,29 @@ static int check_rectangle(t_pvars *v)
 
 static int check_walls_surround(t_pvars *v)
 {
-	int j;
+	int i;
 
-	j = 0;
-	while(v->map[0][j])
+	i = 0;
+	while(v->map[0][i])
 	{
-		if(v->map[0][j] == '1')
-			j++;
+		if(v->map[0][i] == '1')
+			i++;
 		else
 			return(1);
 	}
-	j = 0;
-	while(v->map[v->rows_map - 1][j])
+	i = 0;
+	while(v->map[v->rows_map - 1][i])
 	{
-		if(v->map[v->rows_map - 1][j] == '1')
-			j++;
+		if(v->map[v->rows_map - 1][i] == '1')
+			i++;
 		else
 			return(1);
 	}
-	j = 0;
-	while (j < v->rows_map)
+	i = 0;
+	while (i < v->rows_map)
 	{
-		if (v->map[j][0] == '1' && v->map[j][v->chars_map - 1] == '1')
-			j++;
+		if (v->map[i][0] == '1' && v->map[i][v->chars_map - 1] == '1')
+			i++;
 		else
 			return (1);
 	}
@@ -94,17 +94,16 @@ int init_check_map(t_pall *all)
 {
 	if(all->vars.rows_map < 3 || all->vars.chars_map < 2)
 	{
-		ft_printf("Error\nInvalid map\n");
+		all->error = "Error\nInvalid map\n";
 		return(1);
 	}
 
-	if(check_rectangle(&all->vars) == 1 || init_items(all) == 1)
+	if(check_rectangle(all) == 1 || init_items(all) == 1)
 		return(1);
 	if(check_walls_surround(&all->vars) == 1)
 	{
-		ft_printf("Error\nMap not surrounded by walls\n");
+		all->error = "Error\nMap not surrounded by walls\n";
 		return(1);
-
 	}
 
 	printf("map checked\n");
