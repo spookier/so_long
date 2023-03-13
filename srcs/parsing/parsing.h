@@ -16,6 +16,8 @@ typedef struct s_items
 	int start;
 	int exit;
 	int collectibles;
+	int pos_start_x;
+	int pos_start_y;
 
 } t_items;
 
@@ -26,6 +28,7 @@ typedef struct s_pall
 	char *error;
 
 }	t_pall;
+
 
 void showmap(t_pvars *v);
 int count_chars(char *line);

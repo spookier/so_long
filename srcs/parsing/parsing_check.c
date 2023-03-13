@@ -1,28 +1,37 @@
 #include "parsing.h"
 
-void flood_fill(t_pall *all) 
-{
-    // Check if current position is out of bounds or has already been visited
-    if (row < 0 || row >= rows || col < 0 || col >= cols || visited[row][col]) {
-        return;
-    }
-
-    // Mark current position as visited
-    visited[row][col] = 1;
-
-    // Check if current position is a valid path
-    if (map[row][col] != '0' && map[row][col] != 'P' && map[row][col] != 'E') {
-        return;
-    }
-
-    // Recursively flood fill adjacent positions
-    flood_fill(map, row - 1, col, visited);  // Up
-    flood_fill(map, row + 1, col, visited);  // Down
-    flood_fill(map, row, col - 1, visited);  // Left
-    flood_fill(map, row, col + 1, visited);  // Right
+int is_valid_position(t_pall *all, char visited[all->vars.rows_map][all->vars.chars_map], int x, int y) {
+    if (x >= 0 && x < all->vars.rows_map && y >= 0 && y < all->vars.chars_map && visited[x][y] == '0') 
+		return 1;
+    return 0;
 }
 
+int flood_fill(t_pall *all, char visited[all->vars.rows_map][all->vars.chars_map], int x, int y) 
+{
+    // If we reach the end position, return true
+    if (visited[x][y] == 'E') 
+	{
+        return 1;
+    }
 
+    // Mark the current position as visited
+    visited[x][y] = 'x';
+
+    // Check if we can move in all directions
+    if (is_valid_position(all, visited, x-1, y) && flood_fill(all, visited, x-1, y)) {
+        return 1;
+    }
+    if (is_valid_position(all, visited, x+1, y) && flood_fill(all, visited,  x+1, y)) {
+        return 1;
+    }
+    if (is_valid_position(all, visited, x, y-1) && flood_fill(all, visited, x, y-1)) {
+        return 1;
+    }
+    if (is_valid_position(all, visited, x, y+1) && flood_fill(all, visited, x, y+1)) {
+        return 1;
+    }
+    return 0;
+}
 
 static void check_map_validity(t_pall *all)
 {
@@ -129,7 +138,47 @@ int init_check_map(t_pall *all)
 		all->error = "Error\nMap not surrounded by walls\n";
 		return(1);
 	}
+	
+	char visited[all->vars.rows_map - 1][all->vars.chars_map - 1];
+	int i;
+	int j;
 
+	i = 0;
+	while(i < all->vars.rows_map)
+	{
+		j = 0;
+		while(j < all->vars.chars_map)
+		{
+			visited[i][j] = all->vars.map[i][j];
+			j++;
+		}
+		i++;
+	}
+
+	if (flood_fill(all, visited, 3, 3))
+    {
+        printf("Path found!\n");
+    }
+    else
+    {
+        printf("Path not found.\n");
+    }
+
+	printf("\n");
+	i = 0;
+	while(i < all->vars.rows_map)
+	{
+		j = 0;
+		while(j < all->vars.chars_map)
+		{
+			printf("%c", visited[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+	printf("\n");
+	exit(1);
 	printf("map checked\n");
 	return(0);
 }
