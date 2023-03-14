@@ -29,7 +29,7 @@ int	fill_collectible(t_all *all)
 		one = 0;
 		while (one < MAP_WIDTH)
 		{
-			if (all->map[two][one] == '4')
+			if (all->map[two][one] == 'C')
 			{
 				mlx_put_image_to_window(all->engine.mlx,
 					all->engine.mlx_win, all->sprites[4].texture_addr, j, i);
@@ -46,7 +46,7 @@ int	fill_collectible(t_all *all)
 
 int	eat_collectible(t_all *all)
 {
-	all->map[all->player_pos.y / 32][all->player_pos.x / 32] = 0;
+	all->map[all->player_pos.y / 32][all->player_pos.x / 32] = '0';
 	if (all->collectible_counter - 1 == 0)
 		all->exit_flag = 1;
 	all->collectible_counter--;
