@@ -9,8 +9,6 @@ int main(int argc, char **argv)
 	if (parsing_main(&all, argc, argv) == 1)
 		return(1);
 
-	printf("----- starting drawing ------\n");
-	
 	exec_main(&all);
 	
 	//free_map();
