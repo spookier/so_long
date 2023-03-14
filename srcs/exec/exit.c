@@ -14,9 +14,11 @@
 
 static int	spawn_exit(t_all *all)
 {
-	if (all->exit_flag == 1
-		&& map[(all->player_pos.y) / 32][(all->player_pos.x) / 32] == 3)
+	if (all->exit_flag == 1 && all->map[(all->player_pos.y) / 32][(all->player_pos.x) / 32] == 'E')
+	{
+		//do ft_exit or something instead of exit
 		exit(0);
+	}
 	return (0);
 }
 
@@ -36,7 +38,7 @@ int	fill_exit(t_all *all)
 		one = 0;
 		while (one < MAP_WIDTH)
 		{
-			if (map[two][one] == 3)
+			if (all->map[two][one] == 'E')
 				mlx_put_image_to_window(all->engine.mlx,
 					all->engine.mlx_win, all->sprites[3].texture_addr, j, i);
 			j += 32;

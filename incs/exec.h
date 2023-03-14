@@ -19,12 +19,12 @@
 // WINDOW
 #define SCREEN_HEIGHT 1080
 #define SCREEN_WIDTH 1080
-#define MAP_HEIGHT 30
-#define MAP_WIDTH 30
+#define MAP_HEIGHT 7
+#define MAP_WIDTH 7
 
 #define TILE_SIZE 32
 
-extern int map[MAP_HEIGHT][MAP_WIDTH];
+//extern int map[MAP_HEIGHT][MAP_WIDTH];
 
 
 

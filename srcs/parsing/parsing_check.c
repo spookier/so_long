@@ -7,15 +7,13 @@ static int is_valid_position(t_pall *all, char visited[all->vars.rows_map][all->
 		return (1);
 	if(visited[x][y] == 'E')
 		return(1);
-    return (0);
+ 		   return (0);
 }
 
 int flood_fill(t_pall *all, char visited[all->vars.rows_map][all->vars.chars_map], int x, int y) 
 {
     if (visited[x][y] == 'E') 
-	{
         return (1);
-    }
     visited[x][y] = 'x';
 
     if (is_valid_position(all, visited, x-1, y) && flood_fill(all, visited, x-1, y)) {
