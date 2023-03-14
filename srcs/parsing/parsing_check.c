@@ -75,14 +75,15 @@ static void copy_map(t_pall *all, char visited[all->vars.rows_map][all->vars.cha
 	return;
 }
 
-static void check_map_validity(t_pall *all)
+static int check_map_validity(t_pall *all)
 {
     int i;
+	int j;
 	
 	i = 0;
     while (i < all->vars.rows_map) 
 	{
-        int j = 0;
+        j = 0;
         while (j < all->vars.chars_map) 
 		{
             if (all->vars.map[i][j] == 'E')
@@ -91,10 +92,16 @@ static void check_map_validity(t_pall *all)
                all->items.collectibles++;
             else if (all->vars.map[i][j] == 'P') 
 				all->items.start++;
+			else if (all->vars.map[i][j] != '0' && all->vars.map[i][j]  != '1') 
+            {
+                all->error = "Error\nInvalid character in map\n";
+                return(1);
+            }
             j++;
         }
         i++;
     }
+	return(0);
 }
 
 
@@ -104,7 +111,8 @@ static int init_items(t_pall *all)
 	all->items.exit = 0;
 	all->items.collectibles = 0;
 
-	check_map_validity(all);
+	if(check_map_validity(all) == 1)
+		return(1);
 	if (all->items.start != 1 || all->items.exit != 1 || all->items.collectibles < 1) 
 	{
 		all->error = "Error\nNot enough map components\n";
@@ -175,7 +183,6 @@ int init_check_map(t_pall *all)
 		all->error = "Error\nInvalid map\n";
 		return(1);
 	}
-
 	if(check_rectangle(all) == 1 || init_items(all) == 1)
 		return(1);
 	if(check_walls_surround(&all->vars) == 1)
@@ -187,11 +194,9 @@ int init_check_map(t_pall *all)
 	copy_map(all, visited);
 
 	find_exit(all);
+
 	if (flood_fill(all, visited, all->items.pos_start_x, all->items.pos_start_y))
-	{
-		printf("map ok\n");
         return(0);
-	}
     else
 	{
 		all->error = "Error\nPath not found\n";
