@@ -31,6 +31,7 @@ static int	*sprite_loader(t_all *all, char *texture_path)
 
 static int	load_sprites(t_all *all)
 {
+	//check if sprite is NULL return 1
 	all->sprites[0].texture_addr = sprite_loader(all, "textures/block_.xpm");
 	all->sprites[1].texture_addr = sprite_loader(all, "textures/player_.xpm");
 	all->sprites[2].texture_addr = sprite_loader(all, "textures/sand_.xpm");

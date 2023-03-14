@@ -17,10 +17,9 @@
 # define ESC		0xFF1B
 
 // WINDOW
-#define SCREEN_HEIGHT 1080
-#define SCREEN_WIDTH 1080
-#define MAP_HEIGHT 7
-#define MAP_WIDTH 7
+// #define SCREEN_HEIGHT 1080
+// #define SCREEN_WIDTH 1080
+
 
 #define TILE_SIZE 32
 
@@ -37,10 +36,10 @@ int		redraw(t_all *data);
 int 	spawn_player(t_all *all);
 int		update_player(t_all *data);
 
-int	move_player_up(t_all *all);
-int	move_player_down(t_all *all);
-int	move_player_left(t_all *all);
-int	move_player_right(t_all *all);
+int		move_player_up(t_all *all);
+int		move_player_down(t_all *all);
+int		move_player_left(t_all *all);
+int		move_player_right(t_all *all);
 
 int 	fill_wall(t_all *all);
 int 	fill_background(t_all *all);

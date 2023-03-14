@@ -23,11 +23,11 @@ int	fill_collectible(t_all *all)
 	two = 0;
 	all->collectible_counter = 0;
 	i = 0;
-	while (two < MAP_HEIGHT)
+	while (two < all->MAP_HEIGHT)
 	{
 		j = 0;
 		one = 0;
-		while (one < MAP_WIDTH)
+		while (one < all->MAP_WIDTH)
 		{
 			if (all->map[two][one] == 'C')
 			{

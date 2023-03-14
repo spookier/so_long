@@ -29,11 +29,11 @@ int	spawn_player(t_all *all)
 	map_xy[0] = 0;
 	map_xy[1] = 0;
 	i = 0;
-	while (map_xy[1] < MAP_HEIGHT)
+	while (map_xy[1] < all->MAP_HEIGHT)
 	{
 		j = 0;
 		map_xy[0] = 0;
-		while (map_xy[0] < MAP_WIDTH)
+		while (map_xy[0] < all->MAP_WIDTH)
 		{
 			if (all->map[map_xy[1]][map_xy[0]] == 'P')
 				spawn_player_norminette(all, i, j);
