@@ -28,7 +28,7 @@ int	fill_wall(t_all *all)
 		one = 0;
 		while (one < MAP_WIDTH)
 		{
-			if (map[two][one] == 1)
+			if (all->map[two][one] == '1')
 				mlx_put_image_to_window(all->engine.mlx, all->engine.mlx_win,
 					all->sprites[0].texture_addr, j, i);
 			j += 32;

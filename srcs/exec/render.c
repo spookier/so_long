@@ -22,22 +22,21 @@ static int	*sprite_loader(t_all *all, char *texture_path)
 	texture = mlx_xpm_file_to_image(all->engine.mlx,
 			texture_path, &zero, &zero);
 	if (!texture)
+	{
+		printf("Error\nFailed to load texture\n");
 		return (NULL);
+	}
 	return (texture);
 }
 
 static int	load_sprites(t_all *all)
 {
-	all->sprites[0].texture_addr
-		= sprite_loader(all, "textures/block_.xpm");
-	all->sprites[1].texture_addr
-		= sprite_loader(all, "textures/player_.xpm");
-	all->sprites[2].texture_addr
-		= sprite_loader(all, "textures/sand_.xpm");
-	all->sprites[3].texture_addr
-		= sprite_loader(all, "textures/exit_.xpm");
-	all->sprites[4].texture_addr
-		= sprite_loader(all, "textures/collectible_.xpm");
+	all->
+	all->sprites[0].texture_addr = sprite_loader(all, "textures/block_.xpm");
+	all->sprites[1].texture_addr = sprite_loader(all, "textures/player_.xpm");
+	all->sprites[2].texture_addr = sprite_loader(all, "textures/sand_.xpm");
+	all->sprites[3].texture_addr = sprite_loader(all, "textures/exit_.xpm");
+	all->sprites[4].texture_addr = sprite_loader(all, "textures/collectible_.xpm");
 	return (0);
 }
 
