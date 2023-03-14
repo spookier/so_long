@@ -1,5 +1,4 @@
-#include "parsing.h"
-
+#include "../../incs/so_long.h"
 
 void showmap(t_pvars *v)
 {
@@ -45,7 +44,6 @@ int fill_map(char *line, int fd, t_pvars *v)
 		i++;
 	}
 	get_next_line(-1);
-	printf("map fill'd\n");
 	return (0);
 }
 
@@ -65,7 +63,6 @@ void free_map(t_pvars *v)
 		free(v->map);
 		v->map = NULL;
 	}
-	printf("map free'd\n");
 }
 
 
@@ -89,11 +86,9 @@ int alloc_map(t_pvars *v)
 				i--;
 			}
 			free(v->map);
-			ft_printf("Error\nMap failled to allocate\n");
 			return (1);
 		}
 		i++;
 	}
-	printf("map alloc'd\n");
 	return (0);
 }

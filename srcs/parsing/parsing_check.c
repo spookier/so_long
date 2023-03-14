@@ -1,4 +1,5 @@
-#include "parsing.h"
+#include "../../incs/so_long.h"
+
 
 static int is_valid_position(t_pall *all, char visited[all->vars.rows_map][all->vars.chars_map], int x, int y) 
 {
@@ -38,7 +39,7 @@ static void find_exit(t_pall *all)
 	int i;
 	int j;
 
-	i =0;
+	i = 0;
 	while(i < all->vars.rows_map)
 	{
 		j = 0;
@@ -190,11 +191,8 @@ int init_check_map(t_pall *all)
 		all->error = "Error\nMap not surrounded by walls\n";
 		return(1);
 	}
-
 	copy_map(all, visited);
-
 	find_exit(all);
-
 	if (flood_fill(all, visited, all->items.pos_start_x, all->items.pos_start_y))
         return(0);
     else
