@@ -1,7 +1,7 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
-//#include "so_long.h"
+#include "so_long.h"
 
 typedef struct	s_engine {
 	void	*mlx;

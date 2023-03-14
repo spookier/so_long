@@ -24,9 +24,6 @@
 
 #define TILE_SIZE 32
 
-//extern int map[MAP_HEIGHT][MAP_WIDTH];
-
-
 
 //MAIN FUNCTIONS
 int 	exec_main(t_pall *p);
@@ -53,7 +50,6 @@ int 	fill_collectible(t_all *all);
 int 	check_collectible(t_all *all);
 
 
-//PARSING FUNCTIONS
 
 
 #endif

@@ -75,7 +75,7 @@ re : fclean
 	make all
 
 ex :
-	make all && ./so_long
+	make all && ./so_long test.ber
 
 
 .PHONY : all clean fclean re
