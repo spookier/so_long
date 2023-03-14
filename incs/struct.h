@@ -15,6 +15,7 @@ typedef struct	s_engine {
 	int		img_width;
 	int		img_height;
 	void 	*params;
+
 }				t_engine;
 
 
@@ -46,6 +47,10 @@ typedef struct	s_all {
 	int			collectible_counter;
 	int			exit_flag;
 	char         **map;
+	int		SCREEN_HEIGHT;
+	int		SCREEN_WIDTH;
+	int		MAP_HEIGHT;
+	int		MAP_WIDTH;
 
 }				t_all;
 

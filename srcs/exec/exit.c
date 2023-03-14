@@ -32,11 +32,11 @@ int	fill_exit(t_all *all)
 	one = 0;
 	two = 0;
 	i = 0;
-	while (two < MAP_HEIGHT)
+	while (two < all->MAP_HEIGHT)
 	{
 		j = 0;
 		one = 0;
-		while (one < MAP_WIDTH)
+		while (one < all->MAP_WIDTH)
 		{
 			if (all->map[two][one] == 'E')
 				mlx_put_image_to_window(all->engine.mlx,
