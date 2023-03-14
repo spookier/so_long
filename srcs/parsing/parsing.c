@@ -62,6 +62,7 @@ int parsing_exec(char *argv, t_pall *all)
 	//--exec
 	if (calculate_map_size(argv, line, fd, &all->vars) == 1 || alloc_map(&all->vars) == 1)
 		return (1);
+
 	fill_map(line, fd, &all->vars);
 	
 	if(init_check_map(all) == 1)
@@ -86,7 +87,6 @@ int main(int argc, char **argv)
 	all.error = NULL;
 
 	check_arg(argc, argv[1]);
-
 	if (parsing_exec(argv[1], &all) == 1)
 	{
 		ft_printf("%s", all.error);
