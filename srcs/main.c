@@ -1,12 +1,12 @@
 #include "../incs/so_long.h"
 
-int main(void)
+int main(int argc, char **argv)
 {
 	t_pall all;
 	printf("----- MAIN @ PROGRAM START ------\n");
 	
-	// if (parsing_main(&all, argc, argv) == 1)
-	// 	return(1);
+	if (parsing_main(&all, argc, argv) == 1)
+		return(1);
 	
 	exec_main(&all);
 	

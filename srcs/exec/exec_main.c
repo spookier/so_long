@@ -63,9 +63,7 @@ int	ft_exit(t_all *all)
 int exec_main(t_pall *p)
 {
     t_all data;
-	(void)p;
-	//data.map = p->vars.map;
-	//printf("%s\n", data.map[0]);
+	data.map = p->vars.map;
 
 
     mlx_start(&data);
@@ -74,7 +72,6 @@ int exec_main(t_pall *p)
     show_sprites(&data);
     
 	//free_map();
-	printf("----- MAIN @ PROGRAM END ------\n");
 
 	//mlx_loop_hook(data.engine.mlx, &render, &data);
 	mlx_key_hook(data.engine.mlx_win, key_hook, &data.engine);
