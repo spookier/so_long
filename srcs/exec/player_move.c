@@ -14,7 +14,7 @@
 
 int	move_player_up(t_all *all)
 {
-	if (all->map[(all->player_pos.y - 32) / 32][(all->player_pos.x) / 32] != 1)
+	if (all->map[(all->player_pos.y - 32) / 32][(all->player_pos.x) / 32] != '1')
 	{
 		all->player_pos.y -= 32;
 		update_player(all);
@@ -24,7 +24,7 @@ int	move_player_up(t_all *all)
 
 int	move_player_down(t_all *all)
 {
-	if (all->map[(all->player_pos.y + 32) / 32][(all->player_pos.x) / 32] != 1)
+	if (all->map[(all->player_pos.y + 32) / 32][(all->player_pos.x) / 32] != '1')
 	{
 		all->player_pos.y += 32;
 		update_player(all);
@@ -34,7 +34,7 @@ int	move_player_down(t_all *all)
 
 int	move_player_left(t_all *all)
 {
-	if (all->map[(all->player_pos.y) / 32][(all->player_pos.x - 32) / 32] != 1)
+	if (all->map[(all->player_pos.y) / 32][(all->player_pos.x - 32) / 32] != '1')
 	{
 		all->player_pos.x -= 32;
 		update_player(all);
@@ -44,7 +44,7 @@ int	move_player_left(t_all *all)
 
 int	move_player_right(t_all *all)
 {
-	if (all->map[(all->player_pos.y) / 32][(all->player_pos.x + 32) / 32] != 1)
+	if (all->map[(all->player_pos.y) / 32][(all->player_pos.x + 32) / 32] != '1')
 	{
 		all->player_pos.x += 32;
 		update_player(all);
