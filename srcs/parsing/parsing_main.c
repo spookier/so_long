@@ -1,4 +1,5 @@
-#include "parsing.h"
+#include "../../incs/so_long.h"
+
 
 int calculate_map_size(char *argv, char *line, int fd, t_pvars *v)
 {
@@ -26,21 +27,24 @@ int calculate_map_size(char *argv, char *line, int fd, t_pvars *v)
 	return (0);
 }
 
-int check_arg(int argc, char *argv)
+int check_arg(t_pall *all, int argc, char *argv)
 {
 	int len;
 
-		if (argc != 2)
+	if (argc != 2)
+	{
+		all->error = "Error\nMissing map argument\n";
 		return (1);
+	}
 	len = ft_strlen(argv);
 	if (len <= 4)
 	{
-		ft_printf("Error\nNot a .ber type\n");
+		all->error = "Error\nNot a .ber type\n";
 		return (1);
 	}
 	if (ft_strcmp(argv + len - 4, ".ber") != 0)
 	{
-		ft_printf("Error\nNot a .ber type\n");
+		all->error = "Error\nNot a .ber type\n";
 		return (1);
 	}
 	return (0);
@@ -57,11 +61,16 @@ int parsing_exec(char *argv, t_pall *all)
 	line = NULL;
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
+	{
+		all->error = "Error\nFile not found\n";
 		return (1);
-
+	}
 	//--exec
 	if (calculate_map_size(argv, line, fd, &all->vars) == 1 || alloc_map(&all->vars) == 1)
+	{
+		all->error = "Error\nFailed to allocate map\n";
 		return (1);
+	}
 
 	fill_map(line, fd, &all->vars);
 	
@@ -70,28 +79,27 @@ int parsing_exec(char *argv, t_pall *all)
 		free_map(&all->vars);
 		return(1);
 	}
-	
 
-	showmap(&all->vars);
+	//showmap(&all->vars);
 
 
 	//--cleanup
+	//free in exec not here
 	free_map(&all->vars);
 	close(fd);
 	return (0);
 }
 
-int main(int argc, char **argv)
+int parsing_main(t_pall *all, int argc, char **argv)
 {
-	t_pall all;
-	all.error = NULL;
+	//t_pall all;
+	all->error = NULL;
 
-	check_arg(argc, argv[1]);
-	if (parsing_exec(argv[1], &all) == 1)
+	if (check_arg(all, argc, argv[1]) == 1 || parsing_exec(argv[1], all) == 1)
 	{
-		ft_printf("%s", all.error);
+		ft_printf("%s", all->error);
 		return (1);
 	}
-	printf("--------------end of parsing--------------\n");
+	printf("--------------PARSING OK--------------\n");
 	return (0);
 }

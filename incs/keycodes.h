@@ -1,6 +1,8 @@
 #ifndef SOLONG_KEYCODES_H
 # define SOLONG_KEYCODES_H
 
+#include "so_long.h"
+
 /* linux key code */
 # define KEY_UP				0xFF52
 # define KEY_DOWN			0xFF54
