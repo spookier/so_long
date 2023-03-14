@@ -85,7 +85,7 @@ int parsing_exec(char *argv, t_pall *all)
 
 	//--cleanup
 	//free in exec not here
-	free_map(&all->vars);
+	//free_map(&all->vars);
 	close(fd);
 	return (0);
 }

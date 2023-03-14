@@ -63,6 +63,7 @@ int	ft_exit(t_all *all)
 int exec_main(t_pall *p)
 {
     t_all data;
+
 	data.map = p->vars.map;
 
 
