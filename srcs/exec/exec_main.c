@@ -12,7 +12,6 @@
                                             &data->engine.endian); 
     }
 
-
     int	ft_exit(t_all *all)
     {
         mlx_clear_window(all->engine.mlx, all->engine.mlx_win);
