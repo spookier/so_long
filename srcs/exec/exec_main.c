@@ -14,11 +14,23 @@
 
     int	ft_exit(t_all *all)
     {
+
+        mlx_destroy_image(all->engine.mlx, all->sprites[0].texture_addr);
+        if(all->sprites[0].texture_addr)
+            printf("1 HAS value\n");
+        else
+            printf("1 NO value\n");
+        usleep(10000000);
+
+        mlx_destroy_image(all->engine.mlx, all->sprites[1].texture_addr);
+        mlx_destroy_image(all->engine.mlx, all->sprites[2].texture_addr);
+        mlx_destroy_image(all->engine.mlx, all->sprites[3].texture_addr);
+        mlx_destroy_image(all->engine.mlx, all->sprites[4].texture_addr);
+        free(all->map);
         mlx_clear_window(all->engine.mlx, all->engine.mlx_win);
         mlx_destroy_window(all->engine.mlx, all->engine.mlx_win);
 
         /* don't  forget to free everything */
-        //free(all->map);
         return (0);
     }
 
@@ -56,7 +68,7 @@
         //mlx_loop_hook(data.engine.mlx, &render, &data);
         mlx_key_hook(data.engine.mlx_win, key_hook, &data.engine);
 
-        mlx_hook(data.engine.mlx_win, 17, 2, ft_exit, &data.engine); 
+        //mlx_hook(data.engine.mlx_win, 17, 2, ft_exit, &data.engine); 
 
         mlx_loop(data.engine.mlx);
 

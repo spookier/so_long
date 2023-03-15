@@ -72,10 +72,22 @@ int	key_hook(int keycode, t_all *all)
 		move_player_right(all);
 	if (keycode == ESC)
 	{
-		mlx_clear_window(all->engine.mlx, all->engine.mlx_win);
-		mlx_destroy_window(all->engine.mlx, all->engine.mlx_win);
+        free(all->map);
+		//faire les check pour tout les sprites
+
+		if(all->sprites[0].texture_addr)
+        	mlx_destroy_image(all->engine.mlx, all->sprites[0].texture_addr);
+
+        mlx_destroy_image(all->engine.mlx, all->sprites[1].texture_addr);
+        mlx_destroy_image(all->engine.mlx, all->sprites[2].texture_addr);
+        mlx_destroy_image(all->engine.mlx, all->sprites[3].texture_addr);
+        mlx_destroy_image(all->engine.mlx, all->sprites[4].texture_addr);
+        mlx_destroy_image(all->engine.mlx, all->engine.img);
+        mlx_clear_window(all->engine.mlx, all->engine.mlx_win);
+        mlx_destroy_window(all->engine.mlx, all->engine.mlx_win);
+		mlx_destroy_display(all->engine.mlx);
 		/* don't  forget to free everything */
-		exit(1);
+		//exit(1);
 	}
 	return (0);
 }
