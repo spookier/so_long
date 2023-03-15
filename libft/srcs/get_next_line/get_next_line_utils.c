@@ -6,13 +6,13 @@
 /*   By: acostin <acostin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 13:36:43 by acostin           #+#    #+#             */
-/*   Updated: 2023/01/11 14:44:58 by acostin          ###   ########.fr       */
+/*   Updated: 2023/03/15 22:38:33 by acostin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/get_next_line.h"
 
-size_t	gnl_ft_strlen(char *s)
+size_t	gnl_strlen(char *s)
 {
 	size_t	i;
 
@@ -24,7 +24,7 @@ size_t	gnl_ft_strlen(char *s)
 	return (i);
 }
 
-char	*gnl_ft_strchr(char *s, int c)
+char	*gnl_strchr(char *s, int c)
 {
 	int	i;
 
@@ -32,7 +32,7 @@ char	*gnl_ft_strchr(char *s, int c)
 	if (!s)
 		return (0);
 	if (c == '\0')
-		return ((char *)&s[gnl_ft_strlen(s)]);
+		return ((char *)&s[gnl_strlen(s)]);
 	while (s[i] != '\0')
 	{
 		if (s[i] == (char)c)
@@ -42,7 +42,7 @@ char	*gnl_ft_strchr(char *s, int c)
 	return (0);
 }
 
-char	*gnl_ft_strjoin(char *storage, char *buf)
+char	*gnl_strjoin(char *storage, char *buf)
 {
 	size_t	i;
 	size_t	j;
@@ -55,7 +55,7 @@ char	*gnl_ft_strjoin(char *storage, char *buf)
 	}
 	if (!storage || !buf)
 		return (NULL);
-	new_str = malloc(sizeof(char) * ((gnl_ft_strlen(storage) + gnl_ft_strlen(buf))
+	new_str = malloc(sizeof(char) * ((gnl_strlen(storage) + gnl_strlen(buf))
 				+ 1));
 	if (new_str == NULL)
 		return (NULL);
@@ -66,7 +66,7 @@ char	*gnl_ft_strjoin(char *storage, char *buf)
 			new_str[i] = storage[i];
 	while (buf[j] != '\0')
 		new_str[i++] = buf[j++];
-	new_str[gnl_ft_strlen(storage) + gnl_ft_strlen(buf)] = '\0';
+	new_str[gnl_strlen(storage) + gnl_strlen(buf)] = '\0';
 	free(storage);
 	return (new_str);
 }
@@ -113,7 +113,7 @@ char	*new_storage(char *storage)
 		free(storage);
 		return (NULL);
 	}
-	new_storage = (char *)malloc(sizeof(char) * (gnl_ft_strlen(storage) - i + 1));
+	new_storage = (char *)malloc(sizeof(char) * (gnl_strlen(storage) - i + 1));
 	if (!storage)
 		return (NULL);
 	i++;

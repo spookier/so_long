@@ -6,7 +6,7 @@
 /*   By: acostin <acostin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 13:36:47 by acostin           #+#    #+#             */
-/*   Updated: 2023/03/11 06:29:12 by acostin          ###   ########.fr       */
+/*   Updated: 2023/03/15 22:38:37 by acostin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*read_line(int fd, char *storage)
 	if (!buffer)
 		return (NULL);
 	bytes_read = 1;
-	while (!gnl_ft_strchr(storage, '\n') && bytes_read != 0)
+	while (!gnl_strchr(storage, '\n') && bytes_read != 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
@@ -30,7 +30,7 @@ char	*read_line(int fd, char *storage)
 			return (NULL);
 		}
 		buffer[bytes_read] = '\0';
-		storage = gnl_ft_strjoin(storage, buffer);
+		storage = gnl_strjoin(storage, buffer);
 	}
 	free(buffer);
 	return (storage);

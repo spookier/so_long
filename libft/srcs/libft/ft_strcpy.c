@@ -6,13 +6,13 @@
 /*   By: acostin <acostin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 08:34:04 by acostin           #+#    #+#             */
-/*   Updated: 2023/03/12 12:02:08 by acostin          ###   ########.fr       */
+/*   Updated: 2023/03/15 22:37:25 by acostin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char *ft_strcpy(char *dest, char *src)
+char	*ft_strcpy(char *dest, char *src)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (src[i])

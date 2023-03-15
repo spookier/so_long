@@ -6,7 +6,7 @@
 /*   By: acostin <acostin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:06:42 by acostin           #+#    #+#             */
-/*   Updated: 2023/03/09 21:08:29 by acostin          ###   ########.fr       */
+/*   Updated: 2023/03/15 22:33:56 by acostin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ int	fill_wall(t_all *all)
 	one = 0;
 	two = 0;
 	i = 0;
-	while (two < all->MAP_HEIGHT)
+	while (two < all->map_height)
 	{
 		j = 0;
 		one = 0;
-		while (one < all->MAP_WIDTH)
+		while (one < all->map_width)
 		{
 			if (all->map[two][one] == '1')
 				mlx_put_image_to_window(all->engine.mlx, all->engine.mlx_win,

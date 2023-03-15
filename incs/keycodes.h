@@ -1,7 +1,19 @@
-#ifndef SOLONG_KEYCODES_H
-# define SOLONG_KEYCODES_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   keycodes.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acostin <acostin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/15 22:24:49 by acostin           #+#    #+#             */
+/*   Updated: 2023/03/15 22:25:49 by acostin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "so_long.h"
+#ifndef KEYCODES_H
+# define KEYCODES_H
+
+# include "so_long.h"
 
 /* linux key code */
 # define KEY_UP				0xFF52
@@ -45,13 +57,6 @@
 # define KEY_B				0x62
 # define KEY_N				0x6E
 
-# define KEY_POINT			0x2E
-# define KEY_SLASH			0x2F
-# define KEY_SEMICOLON			0x3B
-# define KEY_SINGLE_QUOTE		0x27
-# define KEY_SQUARE_BRACKET_LEFT	0x5B
-# define KEY_SQUARE_BRACKET_RIGHT	0x5D
-
 # define KEY_F1				0xFFBE
 # define KEY_F2				0xFFBF
 # define KEY_F3				0xFFC0
@@ -61,11 +66,5 @@
 # define KEY_F7				0xFFC4
 # define KEY_F8				0xFFC5
 # define KEY_F9				0xFFC6
-
-# define KEY_GRAVE_ACCENT		0x60
-# define KEY_TAB			0xFF09
-# define KEY_CAPSLOCK			0XffE5
-# define KEY_LEFT_SHIFT			0xFFE1
-# define KEY_LEFT_CTRL			0xFFE3
 
 #endif

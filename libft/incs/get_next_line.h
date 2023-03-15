@@ -6,7 +6,7 @@
 /*   By: acostin <acostin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 13:38:02 by acostin           #+#    #+#             */
-/*   Updated: 2023/01/11 13:38:18 by acostin          ###   ########.fr       */
+/*   Updated: 2023/03/15 22:38:20 by acostin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 
 char	*get_next_line(int fd);
 char	*read_line(int fd, char *backup);
-size_t	gnl_ft_strlen(char *s);
-char	*gnl_ft_strchr(char *s, int c);
-char	*gnl_ft_strjoin(char *backup, char *buf);
+size_t	gnl_strlen(char *s);
+char	*gnl_strchr(char *s, int c);
+char	*gnl_strjoin(char *backup, char *buf);
 char	*get_line(char *backup);
 char	*new_storage(char *backup);
 

@@ -6,7 +6,7 @@
 /*   By: acostin <acostin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 08:18:10 by acostin           #+#    #+#             */
-/*   Updated: 2022/12/17 00:22:45 by acostin          ###   ########.fr       */
+/*   Updated: 2023/03/15 22:36:51 by acostin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	ft_printf(const char *str, ...)
 	int		num_args;
 	va_list	args;
 	int		count;
-	
-	if(!str)
-		return(0);
+
+	if (!str)
+		return (0);
 	num_args = check_size(str);
 	va_start(args, str);
 	count = print_all(args, str, num_args);

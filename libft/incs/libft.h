@@ -6,7 +6,7 @@
 /*   By: acostin <acostin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:13:24 by acostin           #+#    #+#             */
-/*   Updated: 2023/03/12 12:02:56 by acostin          ###   ########.fr       */
+/*   Updated: 2023/03/15 22:36:10 by acostin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int			ft_strcmp(char *s1, char *s2);
 int			ft_memcmp(const void *pointer1, const void *pointer2, size_t size);
 int			ft_atoi(const char *str);
 size_t		ft_strlen(const char *s);
-char 		*ft_strcpy(char *dest, char *src);
+char		*ft_strcpy(char *dest, char *src);
 size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 size_t		ft_strlcat(char *dst, const char *src, size_t size);
 void		*ft_memset(void *s, int c, size_t n);

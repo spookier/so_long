@@ -6,7 +6,7 @@
 /*   By: acostin <acostin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:20:46 by acostin           #+#    #+#             */
-/*   Updated: 2023/03/09 21:21:09 by acostin          ###   ########.fr       */
+/*   Updated: 2023/03/15 22:50:30 by acostin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	move_player_up(t_all *all)
 {
-	if (all->map[(all->player_pos.y - 32) / 32][(all->player_pos.x) / 32] != '1')
+	if (all->map[(all->player_pos.y - 32) / 32][(all->player_pos.x) / 32]
+		!= '1')
 	{
 		all->player_pos.y -= 32;
 		update_player(all);
@@ -24,7 +25,8 @@ int	move_player_up(t_all *all)
 
 int	move_player_down(t_all *all)
 {
-	if (all->map[(all->player_pos.y + 32) / 32][(all->player_pos.x) / 32] != '1')
+	if (all->map[(all->player_pos.y + 32) / 32][(all->player_pos.x) / 32]
+		!= '1')
 	{
 		all->player_pos.y += 32;
 		update_player(all);
@@ -34,7 +36,8 @@ int	move_player_down(t_all *all)
 
 int	move_player_left(t_all *all)
 {
-	if (all->map[(all->player_pos.y) / 32][(all->player_pos.x - 32) / 32] != '1')
+	if (all->map[(all->player_pos.y) / 32][(all->player_pos.x - 32) / 32]
+		!= '1')
 	{
 		all->player_pos.x -= 32;
 		update_player(all);
@@ -44,7 +47,8 @@ int	move_player_left(t_all *all)
 
 int	move_player_right(t_all *all)
 {
-	if (all->map[(all->player_pos.y) / 32][(all->player_pos.x + 32) / 32] != '1')
+	if (all->map[(all->player_pos.y) / 32][(all->player_pos.x + 32) / 32]
+		!= '1')
 	{
 		all->player_pos.x += 32;
 		update_player(all);

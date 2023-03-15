@@ -32,6 +32,9 @@ FILES =		$(SRCS_DIR)exec/wall.c \
 			$(SRCS_DIR)exec/collectible.c \
 			$(SRCS_DIR)exec/exec_main.c \
 			$(SRCS_DIR)parsing/parsing_check.c \
+			$(SRCS_DIR)parsing/parsing_error_check_1.c \
+			$(SRCS_DIR)parsing/parsing_error_check_2.c \
+			$(SRCS_DIR)parsing/parsing_flood_fill.c \
 			$(SRCS_DIR)parsing/parsing_functions.c \
 			$(SRCS_DIR)parsing/parsing_main.c \
 			$(SRCS_DIR)main.c \
