@@ -10,8 +10,9 @@ int main(int argc, char **argv)
 		return(1);
 
 	exec_main(&all);
-	
+
+	//free this shit
 	//free_map();
 
 	return (0);
-}
+}	 
