@@ -66,6 +66,8 @@ void free_map(t_pvars *v)
 }
 
 
+
+
 int alloc_map(t_pvars *v)
 {
 	int i;
