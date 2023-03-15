@@ -16,8 +16,7 @@ static int	spawn_exit(t_all *all)
 {
 	if (all->exit_flag == 1 && all->map[(all->player_pos.y) / 32][(all->player_pos.x) / 32] == 'E')
 	{
-		//do ft_exit or something instead of exit
-		exit(0);
+		free_and_exit(all);
 	}
 	return (0);
 }

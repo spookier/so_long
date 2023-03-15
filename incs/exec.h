@@ -26,6 +26,7 @@
 
 //MAIN FUNCTIONS
 int 	exec_main(t_pall *p);
+void	free_and_exit(t_all *all);
 
 
 int		key_hook(int keycode, t_all *all);

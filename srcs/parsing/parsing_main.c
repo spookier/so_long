@@ -76,16 +76,11 @@ int parsing_exec(char *argv, t_pall *all)
 	
 	if(init_check_map(all) == 1)
 	{
+		//make a free function to free everything
 		free_map(&all->vars);
 		return(1);
 	}
 
-	//showmap(&all->vars);
-
-
-	//--cleanup
-	//free in exec not here
-	//free_map(&all->vars);
 	close(fd);
 	return (0);
 }

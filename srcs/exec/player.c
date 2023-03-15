@@ -60,6 +60,54 @@ int	update_player(t_all *all)
 	return (0);
 }
 
+
+int free_pv(t_pall *v)
+{
+	int i;
+
+	if (v->vars.map != NULL)
+	{
+		i = 0;
+		while (i < v->vars.rows_map)
+		{
+			free(v->vars.map[i]);
+			i++;
+		}
+		free(v->vars.map);
+		v->vars.map = NULL;
+	}
+	return(0);
+}
+
+
+void free_and_exit(t_all *all)
+{
+
+	if(all->sprites[0].texture_addr)
+        	mlx_destroy_image(all->engine.mlx, all->sprites[0].texture_addr);
+
+        mlx_destroy_image(all->engine.mlx, all->sprites[1].texture_addr);
+        mlx_destroy_image(all->engine.mlx, all->sprites[2].texture_addr);
+        mlx_destroy_image(all->engine.mlx, all->sprites[3].texture_addr);
+        mlx_destroy_image(all->engine.mlx, all->sprites[4].texture_addr);
+        mlx_destroy_image(all->engine.mlx, all->engine.img);
+        mlx_clear_window(all->engine.mlx, all->engine.mlx_win);
+        mlx_destroy_window(all->engine.mlx, all->engine.mlx_win);
+		mlx_destroy_display(all->engine.mlx);
+		
+		int i = 0;
+		while(i < all->MAP_HEIGHT)
+		{
+			free(all->map[i]);
+			i++;
+		}
+		free(all->map);
+		free(all->engine.mlx);
+		//free_pv();
+		/* don't  forget to free everything */
+		exit(0);
+}
+
 int	key_hook(int keycode, t_all *all)
 {
 	if (keycode == KEY_W)
@@ -72,24 +120,10 @@ int	key_hook(int keycode, t_all *all)
 		move_player_right(all);
 	if (keycode == ESC)
 	{
-		//faire les check pour tout les sprites
-    	free(all->map);
 
-		if(all->sprites[0].texture_addr)
-        	mlx_destroy_image(all->engine.mlx, all->sprites[0].texture_addr);
-
-        mlx_destroy_image(all->engine.mlx, all->sprites[1].texture_addr);
-        mlx_destroy_image(all->engine.mlx, all->sprites[2].texture_addr);
-        mlx_destroy_image(all->engine.mlx, all->sprites[3].texture_addr);
-        mlx_destroy_image(all->engine.mlx, all->sprites[4].texture_addr);
-        mlx_destroy_image(all->engine.mlx, all->engine.img);
-        mlx_clear_window(all->engine.mlx, all->engine.mlx_win);
-        mlx_destroy_window(all->engine.mlx, all->engine.mlx_win);
-		mlx_destroy_display(all->engine.mlx);
-		free(all->engine.mlx);
-
-		/* don't  forget to free everything */
-		exit(0);
+		free_and_exit(all);
+		
 	}
 	return (0);
 }
+
