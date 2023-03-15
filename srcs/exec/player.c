@@ -6,13 +6,13 @@
 /*   By: acostin <acostin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:10:54 by acostin           #+#    #+#             */
-/*   Updated: 2023/03/11 03:00:58 by acostin          ###   ########.fr       */
+/*   Updated: 2023/03/15 23:39:34 by acostin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/so_long.h"
 
-void	spawn_player_norminette(t_all *all, int i, int j)
+static void	spawn_player_norminette(t_all *all, int i, int j)
 {
 	mlx_put_image_to_window(all->engine.mlx,
 		all->engine.mlx_win, all->sprites[1].texture_addr, j, i);
@@ -29,11 +29,11 @@ int	spawn_player(t_all *all)
 	map_xy[0] = 0;
 	map_xy[1] = 0;
 	i = 0;
-	while (map_xy[1] < all->MAP_HEIGHT)
+	while (map_xy[1] < all->map_height)
 	{
 		j = 0;
 		map_xy[0] = 0;
-		while (map_xy[0] < all->MAP_WIDTH)
+		while (map_xy[0] < all->map_width)
 		{
 			if (all->map[map_xy[1]][map_xy[0]] == 'P')
 				spawn_player_norminette(all, i, j);
@@ -56,38 +56,33 @@ int	update_player(t_all *all)
 	mlx_put_image_to_window(all->engine.mlx, all->engine.mlx_win,
 		all->sprites[1].texture_addr, all->player_pos.x, all->player_pos.y);
 	all->move_counter++;
-	printf("moves: %d\n", all->move_counter);
+	ft_printf("moves: %d\n", all->move_counter);
 	return (0);
 }
 
-
-void free_and_exit(t_all *all)
+void	free_and_exit(t_all *all)
 {
+	int	i;
 
-	if(all->sprites[0].texture_addr)
-        	mlx_destroy_image(all->engine.mlx, all->sprites[0].texture_addr);
-
-        mlx_destroy_image(all->engine.mlx, all->sprites[1].texture_addr);
-        mlx_destroy_image(all->engine.mlx, all->sprites[2].texture_addr);
-        mlx_destroy_image(all->engine.mlx, all->sprites[3].texture_addr);
-        mlx_destroy_image(all->engine.mlx, all->sprites[4].texture_addr);
-        mlx_destroy_image(all->engine.mlx, all->engine.img);
-		
-        mlx_clear_window(all->engine.mlx, all->engine.mlx_win);
-        mlx_destroy_window(all->engine.mlx, all->engine.mlx_win);
-		mlx_destroy_display(all->engine.mlx);
-		
-		int i = 0;
-		while(i < all->MAP_HEIGHT)
-		{
-			free(all->map[i]);
-			i++;
-		}
-		free(all->map);
-		free(all->engine.mlx);
-		//free_pv();
-		/* don't  forget to free everything */
-		exit(0);
+	if (all->sprites[0].texture_addr)
+		mlx_destroy_image(all->engine.mlx, all->sprites[0].texture_addr);
+	mlx_destroy_image(all->engine.mlx, all->sprites[1].texture_addr);
+	mlx_destroy_image(all->engine.mlx, all->sprites[2].texture_addr);
+	mlx_destroy_image(all->engine.mlx, all->sprites[3].texture_addr);
+	mlx_destroy_image(all->engine.mlx, all->sprites[4].texture_addr);
+	mlx_destroy_image(all->engine.mlx, all->engine.img);
+	mlx_clear_window(all->engine.mlx, all->engine.mlx_win);
+	mlx_destroy_window(all->engine.mlx, all->engine.mlx_win);
+	mlx_destroy_display(all->engine.mlx);
+	i = 0;
+	while (i < all->map_height)
+	{
+		free(all->map[i]);
+		i++;
+	}
+	free(all->map);
+	free(all->engine.mlx);
+	exit(0);
 }
 
 int	key_hook(int keycode, t_all *all)
@@ -100,12 +95,7 @@ int	key_hook(int keycode, t_all *all)
 		move_player_left(all);
 	if (keycode == KEY_D)
 		move_player_right(all);
-	if (keycode == ESC)
-	{
-
+	if (keycode == KEY_ESC)
 		free_and_exit(all);
-		
-	}
 	return (0);
 }
-
