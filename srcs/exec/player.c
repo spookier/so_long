@@ -61,25 +61,6 @@ int	update_player(t_all *all)
 }
 
 
-int free_pv(t_pall *v)
-{
-	int i;
-
-	if (v->vars.map != NULL)
-	{
-		i = 0;
-		while (i < v->vars.rows_map)
-		{
-			free(v->vars.map[i]);
-			i++;
-		}
-		free(v->vars.map);
-		v->vars.map = NULL;
-	}
-	return(0);
-}
-
-
 void free_and_exit(t_all *all)
 {
 
@@ -91,6 +72,7 @@ void free_and_exit(t_all *all)
         mlx_destroy_image(all->engine.mlx, all->sprites[3].texture_addr);
         mlx_destroy_image(all->engine.mlx, all->sprites[4].texture_addr);
         mlx_destroy_image(all->engine.mlx, all->engine.img);
+		
         mlx_clear_window(all->engine.mlx, all->engine.mlx_win);
         mlx_destroy_window(all->engine.mlx, all->engine.mlx_win);
 		mlx_destroy_display(all->engine.mlx);
