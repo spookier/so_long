@@ -12,7 +12,13 @@ static int is_valid_position(t_pall *all, char visited[all->vars.rows_map][all->
 
 int flood_fill(t_pall *all, char visited[all->vars.rows_map][all->vars.chars_map], int x, int y) 
 {
-    if (visited[x][y] == 'E') 
+	printf("LLL = %d\n", all->items.check_collectibles);
+	if (visited[x][y] == 'C')
+	{
+		printf("LLL = %d\n", all->items.check_collectibles);
+		all->items.check_collectibles--;
+	}
+    if (visited[x][y] == 'E' && all->items.check_collectibles == 0)
         return (1);
     visited[x][y] = 'x';
 
@@ -28,7 +34,6 @@ int flood_fill(t_pall *all, char visited[all->vars.rows_map][all->vars.chars_map
     if (is_valid_position(all, visited, x, y+1) && flood_fill(all, visited, x, y+1)) {
         return 1;
     }
-
     return (0);
 }
 
@@ -52,6 +57,7 @@ static void find_exit(t_pall *all)
 		}
 		i++;
 	}
+	printf("found exit at @ x=%d y=%d\n", all->items.pos_start_x, all->items.pos_start_y);
 	return;
 }
 
@@ -176,6 +182,7 @@ static int check_walls_surround(t_pvars *v)
 int init_check_map(t_pall *all)
 {
 	char visited[all->vars.rows_map][all->vars.chars_map];
+	
 
 	if(all->vars.rows_map < 3 || all->vars.chars_map < 2)
 	{
@@ -191,6 +198,8 @@ int init_check_map(t_pall *all)
 	}
 	copy_map(all, visited);
 	find_exit(all);
+	all->items.check_collectibles = all->items.collectibles;
+
 	if (flood_fill(all, visited, all->items.pos_start_x, all->items.pos_start_y))
         return(0);
     else
