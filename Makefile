@@ -2,7 +2,7 @@
 # Variables
 NAME = so_long
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 
 # path for srcs
 SRCS_DIR = ./srcs/
@@ -76,6 +76,9 @@ re : fclean
 
 ex :
 	make all && ./so_long test.ber
+
+exv :
+	make all && valgrind --leak-check=full --show-leak-kinds=all ./so_long test.ber
 
 
 .PHONY : all clean fclean re
