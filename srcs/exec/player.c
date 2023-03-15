@@ -86,6 +86,7 @@ int	key_hook(int keycode, t_all *all)
         mlx_clear_window(all->engine.mlx, all->engine.mlx_win);
         mlx_destroy_window(all->engine.mlx, all->engine.mlx_win);
 		mlx_destroy_display(all->engine.mlx);
+		free(all->engine.mlx);
 
 		/* don't  forget to free everything */
 		exit(0);
