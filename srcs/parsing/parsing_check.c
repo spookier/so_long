@@ -1,43 +1,93 @@
 #include "../../incs/so_long.h"
 
 
-static int is_valid_position(t_pall *all, char visited[all->vars.rows_map][all->vars.chars_map], int x, int y) 
-{
-    if (x >= 0 && x < all->vars.rows_map && y >= 0 && y < all->vars.chars_map && (visited[x][y] == '0' || visited[x][y] == 'C')) 
-		return (1);
-	if(visited[x][y] == 'E')
-		return(1);
- 		   return (0);
-}
+// static int is_valid_position(t_pall *all, char visited[all->vars.rows_map][all->vars.chars_map], int x, int y) 
+// {
+//     if (x >= 0 && x < all->vars.rows_map && y >= 0 && y < all->vars.chars_map && (visited[x][y] == '0' || visited[x][y] == 'C'))
+// 		return (1);
+// 	if(visited[x][y] == 'E')
+// 		return(1);
+//  		   return (0);
+// }
 
-int flood_fill(t_pall *all, char visited[all->vars.rows_map][all->vars.chars_map], int x, int y) 
+// int flood_fill(t_pall *all, char visited[all->vars.rows_map][all->vars.chars_map], int x, int y) 
+// {
+// 	// if (visited[x][y] == 'C')
+// 	// {
+// 	// 	printf("LLL = %d\n", all->items.check_collectibles);
+// 	// 	all->items.check_collectibles--;
+// 	// }
+//     // if (visited[x][y] == 'E' && all->items.check_collectibles == 0)
+//     //     return (1);
+	
+//     if (visited[x][y] == 'E')
+//         return (1);
+
+//     visited[x][y] = 'x';
+
+//     if (is_valid_position(all, visited, x-1, y) && flood_fill(all, visited, x-1, y)) {
+//         return 1;
+//     }
+//     if (is_valid_position(all, visited, x+1, y) && flood_fill(all, visited,  x+1, y)) {
+//         return 1;
+//     }
+//     if (is_valid_position(all, visited, x, y-1) && flood_fill(all, visited, x, y-1)) {
+//         return 1;
+//     }
+//     if (is_valid_position(all, visited, x, y+1) && flood_fill(all, visited, x, y+1)) {
+//         return 1;
+//     }
+//     return (0);
+// }
+
+
+void fill(t_pall *all, char visited[all->vars.rows_map][all->vars.chars_map], t_point cur)
 {
-	printf("LLL = %d\n", all->items.check_collectibles);
-	if (visited[x][y] == 'C')
-	{
-		printf("LLL = %d\n", all->items.check_collectibles);
+	//---condition de sortie
+    if (cur.y < 0 || cur.y >= all->vars.rows_map || cur.x < 0 || cur.x >= all->vars.chars_map || visited[cur.y][cur.x] == 'x' || visited[cur.y][cur.x] == '1')
+		return;
+
+	if(visited[cur.y][cur.x] == 'E')
+		all->items.exit_found = 1;
+	
+	if(visited[cur.y][cur.x] == 'C')
 		all->items.check_collectibles--;
-	}
-    if (visited[x][y] == 'E' && all->items.check_collectibles == 0)
-        return (1);
-    visited[x][y] = 'x';
 
-    if (is_valid_position(all, visited, x-1, y) && flood_fill(all, visited, x-1, y)) {
-        return 1;
-    }
-    if (is_valid_position(all, visited, x+1, y) && flood_fill(all, visited,  x+1, y)) {
-        return 1;
-    }
-    if (is_valid_position(all, visited, x, y-1) && flood_fill(all, visited, x, y-1)) {
-        return 1;
-    }
-    if (is_valid_position(all, visited, x, y+1) && flood_fill(all, visited, x, y+1)) {
-        return 1;
-    }
-    return (0);
+
+	
+    visited[cur.y][cur.x] = 'x';
+    fill(all, visited, (t_point){cur.x - 1, cur.y});
+    fill(all, visited, (t_point){cur.x + 1, cur.y});
+    fill(all, visited, (t_point){cur.x, cur.y - 1});
+    fill(all, visited, (t_point){cur.x, cur.y + 1});
 }
 
-static void find_exit(t_pall *all)
+int flood_fill(t_pall *all, char visited[all->vars.rows_map][all->vars.chars_map], t_point cur)
+{
+    fill(all, visited, cur);
+	printf("collectibles: %d\n", all->items.check_collectibles);
+	printf("exit: %d\n", all->items.exit_found);
+
+	if(all->items.exit_found == 1 && all->items.check_collectibles == 0)
+	{
+		printf("MAP FOUND!!!!!!!!!\n");
+		return(0);
+	}
+	else
+		return(1);
+
+}
+
+
+
+
+
+
+
+
+
+
+static void find_player(t_pall *all)
 {
 	int i;
 	int j;
@@ -48,7 +98,7 @@ static void find_exit(t_pall *all)
 		j = 0;
 		while(j < all->vars.chars_map)
 		{
-			if(all->vars.map[i][j] == 'E')
+			if(all->vars.map[i][j] == 'P')
 			{
 				all->items.pos_start_x = j;
 				all->items.pos_start_y = i;
@@ -57,7 +107,7 @@ static void find_exit(t_pall *all)
 		}
 		i++;
 	}
-	printf("found exit at @ x=%d y=%d\n", all->items.pos_start_x, all->items.pos_start_y);
+	printf("found player @ x=%d y=%d\n", all->items.pos_start_x, all->items.pos_start_y);
 	return;
 }
 
@@ -183,6 +233,7 @@ int init_check_map(t_pall *all)
 {
 	char visited[all->vars.rows_map][all->vars.chars_map];
 	
+	all->items.exit_found = 0;
 
 	if(all->vars.rows_map < 3 || all->vars.chars_map < 2)
 	{
@@ -196,17 +247,30 @@ int init_check_map(t_pall *all)
 		all->error = "Error\nMap not surrounded by walls\n";
 		return(1);
 	}
+
 	copy_map(all, visited);
-	find_exit(all);
+	find_player(all);
+
 	all->items.check_collectibles = all->items.collectibles;
 
-	if (flood_fill(all, visited, all->items.pos_start_x, all->items.pos_start_y))
-        return(0);
-    else
+	t_point cur;
+	cur.x = all->items.pos_start_x;
+	cur.y = all->items.pos_start_y;
+	printf("START COLLECTIBLES = %d\n", all->items.check_collectibles);
+    if(flood_fill(all, visited, cur) == 1)
 	{
 		all->error = "Error\nPath not found\n";
 		return(1);
 	}
+
+
+	// if (flood_fill(all, visited, all->items.pos_start_x, all->items.pos_start_y))
+    //     return(0);
+    // else
+	// {
+	// 	all->error = "Error\nPath not found\n";
+	// 	return(1);
+	// }
 
 	printf("map checked\n");
 	return(0);

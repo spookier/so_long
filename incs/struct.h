@@ -70,13 +70,23 @@ typedef struct s_items
 	int pos_start_x;
 	int pos_start_y;
 	int	check_collectibles;
+	int exit_found;
 
 } t_items;
+
+
+typedef struct	s_point
+{
+    int            x;
+    int            y;
+}	t_point;
+
 
 typedef struct s_pall
 {
 	t_pvars vars;
 	t_items items;
+	t_point point;
 	char *error;
 
 }	t_pall;
