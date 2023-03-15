@@ -46,11 +46,12 @@ typedef struct	s_all {
 	int 		move_counter;
 	int			collectible_counter;
 	int			exit_flag;
-	char         **map;
+	char	**map;
 	int		SCREEN_HEIGHT;
 	int		SCREEN_WIDTH;
 	int		MAP_HEIGHT;
 	int		MAP_WIDTH;
+	int		check_exit_ESC;
 
 }				t_all;
 

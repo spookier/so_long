@@ -46,19 +46,19 @@
 
         data->SCREEN_WIDTH = map_width_px;
         data->SCREEN_HEIGHT = map_height_px;
-
-    }
+	}
 
 
     int exec_main(t_pall *p)
     {
         t_all data;
+        data.check_exit_ESC = 0;
 
         data.map = p->vars.map;
-        find_map_size(&data, p);
+		find_map_size(&data, p);
 
 
-        mlx_start(&data);
+		mlx_start(&data);
 
         //start initializing sprites
         show_sprites(&data);
@@ -66,12 +66,15 @@
         //free_map();
 
         //mlx_loop_hook(data.engine.mlx, &render, &data);
+
         mlx_key_hook(data.engine.mlx_win, key_hook, &data.engine);
 
+
+
+   
         //mlx_hook(data.engine.mlx_win, 17, 2, ft_exit, &data.engine); 
 
         mlx_loop(data.engine.mlx);
 
-        
         return(0);
     }

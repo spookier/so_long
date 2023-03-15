@@ -72,8 +72,8 @@ int	key_hook(int keycode, t_all *all)
 		move_player_right(all);
 	if (keycode == ESC)
 	{
-        free(all->map);
 		//faire les check pour tout les sprites
+    	free(all->map);
 
 		if(all->sprites[0].texture_addr)
         	mlx_destroy_image(all->engine.mlx, all->sprites[0].texture_addr);
@@ -86,8 +86,9 @@ int	key_hook(int keycode, t_all *all)
         mlx_clear_window(all->engine.mlx, all->engine.mlx_win);
         mlx_destroy_window(all->engine.mlx, all->engine.mlx_win);
 		mlx_destroy_display(all->engine.mlx);
+
 		/* don't  forget to free everything */
-		//exit(1);
+		exit(0);
 	}
 	return (0);
 }
