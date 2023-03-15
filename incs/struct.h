@@ -69,6 +69,7 @@ typedef struct s_items
 	int collectibles;
 	int pos_start_x;
 	int pos_start_y;
+	int	check_collectibles;
 
 } t_items;
 
