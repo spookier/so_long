@@ -6,7 +6,7 @@
 /*   By: acostin <acostin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 23:43:33 by acostin           #+#    #+#             */
-/*   Updated: 2023/03/15 23:44:50 by acostin          ###   ########.fr       */
+/*   Updated: 2023/03/16 08:59:08 by acostin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,8 @@ static void	fill(t_pall *all, char **visited, t_point cur)
 int	flood_fill(t_pall *all, char **visited, t_point cur)
 {
 	fill(all, visited, cur);
-	ft_printf("collectibles: %d\n", all->items.check_collectibles);
-	ft_printf("exit: %d\n", all->items.exit_found);
 	if (all->items.exit_found == 1 && all->items.check_collectibles == 0)
-	{
-		ft_printf("MAP FOUND!!!!!!!!!\n");
 		return (0);
-	}
 	else
 		return (1);
 }
