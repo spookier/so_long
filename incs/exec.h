@@ -6,7 +6,7 @@
 /*   By: acostin <acostin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 22:22:22 by acostin           #+#    #+#             */
-/*   Updated: 2023/03/15 22:24:40 by acostin          ###   ########.fr       */
+/*   Updated: 2023/03/16 09:39:58 by acostin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 //MAIN FUNCTIONS
 int		exec_main(t_pall *p);
 void	free_and_exit(t_all *all);
+void	free_if_sprites_exist(t_all *all);
 
 int		key_hook(int keycode, t_all *all);
 
