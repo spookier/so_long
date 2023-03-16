@@ -6,7 +6,7 @@
 /*   By: acostin <acostin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:08:36 by acostin           #+#    #+#             */
-/*   Updated: 2023/03/16 09:47:48 by acostin          ###   ########.fr       */
+/*   Updated: 2023/03/16 16:15:52 by acostin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ static void	set_sprite_address_to_zero(t_all *all)
 	int	i;
 
 	i = 0;
-	while (i < 5)
+	while (i <= 4)
 	{
-		all->sprites[i].texture_addr = NULL;
+		if (all->sprites[i].texture_addr != NULL)
+			all->sprites[i].texture_addr = NULL;
 		i++;
 	}
 }
