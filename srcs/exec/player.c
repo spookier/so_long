@@ -6,7 +6,7 @@
 /*   By: acostin <acostin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:10:54 by acostin           #+#    #+#             */
-/*   Updated: 2023/03/15 23:39:34 by acostin          ###   ########.fr       */
+/*   Updated: 2023/03/16 09:39:15 by acostin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,7 @@ void	free_and_exit(t_all *all)
 {
 	int	i;
 
-	if (all->sprites[0].texture_addr)
-		mlx_destroy_image(all->engine.mlx, all->sprites[0].texture_addr);
-	mlx_destroy_image(all->engine.mlx, all->sprites[1].texture_addr);
-	mlx_destroy_image(all->engine.mlx, all->sprites[2].texture_addr);
-	mlx_destroy_image(all->engine.mlx, all->sprites[3].texture_addr);
-	mlx_destroy_image(all->engine.mlx, all->sprites[4].texture_addr);
+	free_if_sprites_exist(all);
 	mlx_destroy_image(all->engine.mlx, all->engine.img);
 	mlx_clear_window(all->engine.mlx, all->engine.mlx_win);
 	mlx_destroy_window(all->engine.mlx, all->engine.mlx_win);

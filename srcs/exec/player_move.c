@@ -6,7 +6,7 @@
 /*   By: acostin <acostin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:20:46 by acostin           #+#    #+#             */
-/*   Updated: 2023/03/15 22:50:30 by acostin          ###   ########.fr       */
+/*   Updated: 2023/03/16 09:39:21 by acostin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,18 @@ int	move_player_right(t_all *all)
 		update_player(all);
 	}
 	return (0);
+}
+
+void	free_if_sprites_exist(t_all *all)
+{
+	if (all->sprites[0].texture_addr)
+		mlx_destroy_image(all->engine.mlx, all->sprites[0].texture_addr);
+	if (all->sprites[1].texture_addr)
+		mlx_destroy_image(all->engine.mlx, all->sprites[1].texture_addr);
+	if (all->sprites[2].texture_addr)
+		mlx_destroy_image(all->engine.mlx, all->sprites[2].texture_addr);
+	if (all->sprites[3].texture_addr)
+		mlx_destroy_image(all->engine.mlx, all->sprites[3].texture_addr);
+	if (all->sprites[4].texture_addr)
+		mlx_destroy_image(all->engine.mlx, all->sprites[4].texture_addr);
 }

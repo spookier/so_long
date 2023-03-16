@@ -6,11 +6,23 @@
 /*   By: acostin <acostin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:08:36 by acostin           #+#    #+#             */
-/*   Updated: 2023/03/15 22:55:46 by acostin          ###   ########.fr       */
+/*   Updated: 2023/03/16 09:47:48 by acostin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/so_long.h"
+
+static void	set_sprite_address_to_zero(t_all *all)
+{
+	int	i;
+
+	i = 0;
+	while (i < 5)
+	{
+		all->sprites[i].texture_addr = NULL;
+		i++;
+	}
+}
 
 static int	*sprite_loader(t_all *all, char *texture_path)
 {
@@ -21,10 +33,11 @@ static int	*sprite_loader(t_all *all, char *texture_path)
 	texture = NULL;
 	texture = mlx_xpm_file_to_image(all->engine.mlx,
 			texture_path, &zero, &zero);
-	if (!texture)
+	if (texture == NULL)
 	{
 		ft_printf("Error\nFailed to load texture\n");
-		return (NULL);
+		set_sprite_address_to_zero(all);
+		free_and_exit(all);
 	}
 	return (texture);
 }
