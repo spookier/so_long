@@ -77,11 +77,4 @@ fclean : clean
 re : fclean
 	make all
 
-ex :
-	make all && ./so_long test.ber
-
-exv :
-	make all && valgrind --leak-check=full --show-leak-kinds=all ./so_long test.ber
-
-
 .PHONY : all clean fclean re
