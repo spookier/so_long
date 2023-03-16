@@ -6,7 +6,7 @@
 /*   By: acostin <acostin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 22:46:27 by acostin           #+#    #+#             */
-/*   Updated: 2023/03/15 22:55:36 by acostin          ###   ########.fr       */
+/*   Updated: 2023/03/16 09:00:07 by acostin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	mlx_start(t_all *data)
 {
-	ft_printf("MLX START!\n");
 	data->engine.mlx
 		= mlx_init();
 	data->engine.mlx_win

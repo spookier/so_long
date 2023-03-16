@@ -6,7 +6,7 @@
 /*   By: acostin <acostin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:24:22 by acostin           #+#    #+#             */
-/*   Updated: 2023/03/15 23:39:13 by acostin          ###   ########.fr       */
+/*   Updated: 2023/03/16 09:00:33 by acostin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	eat_collectible(t_all *all)
 	if (all->collectible_counter - 1 == 0)
 		all->exit_flag = 1;
 	all->collectible_counter--;
-	ft_printf("collectibles remaining: %d\n", all->collectible_counter);
 	return (0);
 }
 

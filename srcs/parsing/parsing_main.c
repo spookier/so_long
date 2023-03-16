@@ -6,7 +6,7 @@
 /*   By: acostin <acostin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 23:48:24 by acostin           #+#    #+#             */
-/*   Updated: 2023/03/15 23:51:29 by acostin          ###   ########.fr       */
+/*   Updated: 2023/03/16 08:59:17 by acostin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,5 @@ int	parsing_main(t_pall *all, int argc, char **argv)
 		ft_printf("%s", all->error);
 		return (1);
 	}
-	ft_printf("--------------PARSING OK--------------\n");
 	return (0);
 }
