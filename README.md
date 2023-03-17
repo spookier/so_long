@@ -35,3 +35,5 @@ The game can be controlled using WASD keys, and the objective is to collect all 
 
 ![image](https://user-images.githubusercontent.com/77325667/226047726-65291bf0-61f2-40c8-a083-75928c323869.png)
 
+![image](https://user-images.githubusercontent.com/77325667/226048285-eceb81b2-eb99-42b0-8378-4491b9f8fa43.png)
+
