@@ -28,3 +28,9 @@ To play the game, simply run the so_long executable with the path to a valid map
 This will start the game with the specified map file
 
 The game can be controlled using WASD keys, and the objective is to collect all collectibles and unlock the exit portal to finish the game
+
+---
+![image](https://user-images.githubusercontent.com/77325667/226047601-6dd5dbda-0990-497f-8160-172971b60819.png)
+
+![image](https://user-images.githubusercontent.com/77325667/226047726-65291bf0-61f2-40c8-a083-75928c323869.png)
+
