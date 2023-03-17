@@ -11,7 +11,7 @@ The game is a maze, and the player must navigate through the maze to collect col
 To use so_long, simply clone the repository and compile it with your project:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/so_long.git
+git clone https://github.com/spookier/so_long.git
 cd so_long
 make
 ```
