@@ -2,6 +2,7 @@
 # so_long
 
 So_long is the first graphics project from Ecole 42, and it challenges students to implement a simple 2D game using the MinilibX graphics library
+
 The game is a maze, and the player must navigate through the maze to collect collectibles and reach the exit
 
 
@@ -25,4 +26,5 @@ To play the game, simply run the so_long executable with the path to a valid map
 ./so_long maps/map.ber
 ```
 This will start the game with the specified map file
+
 The game can be controlled using WASD keys, and the objective is to collect all collectibles and unlock the exit portal to finish the game
