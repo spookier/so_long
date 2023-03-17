@@ -29,6 +29,7 @@ This will start the game with the specified map file
 
 The game can be controlled using WASD keys, and the objective is to collect all collectibles and unlock the exit portal to finish the game
 
+## Screenshots:
 ---
 ![image](https://user-images.githubusercontent.com/77325667/226047601-6dd5dbda-0990-497f-8160-172971b60819.png)
 
