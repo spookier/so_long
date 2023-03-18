@@ -72,7 +72,6 @@ fclean : clean
 	make fclean -C $(LIBFT_DIR)
 	rm -rf $(NAME)
 
-
 #Fclean then build all
 re : fclean
 	make all
