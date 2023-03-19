@@ -2,7 +2,7 @@
 # Variables
 NAME = so_long
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror
 
 # path for srcs
 SRCS_DIR = ./srcs/
