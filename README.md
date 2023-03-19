@@ -1,9 +1,11 @@
 
 # so_long
 
-So_long is the first graphics project from Ecole 42, and it challenges students to implement a simple 2D game using the MinilibX graphics library
+So_long is a graphical project at Ecole 42 that involves creating a simple 2D game using the MinilibX graphic library
 
-The game is a maze, and the player must navigate through the maze to collect collectibles and reach the exit
+The objective of the game is for the player to navigate a character through a maze to collect collectibles and reach the end point without colliding with any obstacles
+
+The project requires the implementation of basic game mechanics, such as character movement and collision detection, as well as more advanced graphics programming techniques, such as rendering textures and handling animations
 
 
 ## Installation
